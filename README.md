@@ -1,4 +1,4 @@
-# CC x Milo
+# Genuine x Milo
 The Franklin based project for creative cloud pages on www.adobe.com. Based off of milo-college.
 
 ## Developing
@@ -6,16 +6,16 @@ The Franklin based project for creative cloud pages on www.adobe.com. Based off 
 2. Run `aem up` this repo's folder. (opens your browser at `http://localhost:3000`)
 3. Open this repo's folder in your favorite editor and start coding.
 
-## Testing Milo Changes on CC Pages
-1. Run 'aem up' in this folder to ensure the cc site is running locally. 
+## Testing Milo Changes on Genuine Pages
+1. Run 'aem up' in this folder to ensure the genuine site is running locally. 
 2. Make changes in milo, and then from the milo folder, run `npm run libs`.
 3. Milo will run at:
 ```
 http://localhost:6456
 ```
 4. On your `localhost:3000/` or the `main-<project>-<owner>` versions of your site, add the URL params: `?milolibs=local`
-5. You should see milo changes occuring on cc pages.
-6. When needing to test on a cc page while making a PR for milo, add the URL params: `?milolibs=<name-of-milo-branch>`to your test URLs.
+5. You should see milo changes occuring on genuine pages.
+6. When needing to test on a genuine page while making a PR for milo, add the URL params: `?milolibs=<name-of-milo-branch>`to your test URLs.
 
 ## Creating New Blocks
 When creating new blocks, first vet any requirements/author-experience in milo-community. There may be a way to acheive your goals with what currently exists in milo. 
