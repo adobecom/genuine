@@ -1,12 +1,11 @@
-export default function defineDeviceByScreenSize() {
-  const DESKTOP_SIZE = 1200;
-  const MOBILE_SIZE = 600;
-  const screenWidth = window.innerWidth;
-  if (screenWidth >= DESKTOP_SIZE) {
-    return 'DESKTOP';
-  }
-  if (screenWidth <= MOBILE_SIZE) {
-    return 'MOBILE';
-  }
-  return 'TABLET';
+function passParams(button) {
+  const urlParams = new URLSearchParams(window.location.search);
+  const gtoken = urlParams.get('gtoken');
+  const gid = urlParams.get('gid');
+  button.href = `${button.href}?gtoken=${gtoken}&gid=${gid}`
+}
+
+export function decorateButton() {
+  const buttons = document.querySelectorAll('a, .con-button');
+  buttons.forEach(button => passParams(button));
 }
