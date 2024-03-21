@@ -20,15 +20,6 @@
  * The decision engine for where to get Milo's libs from.
  */
 
-const DOT_MILO = '/.milo/config.json';
-
-const urlParams = new URLSearchParams(window.location.search);
-const owner = urlParams.get('owner') || 'adobecom';
-const repo = urlParams.get('repo') || 'milo';
-export const origin = `https://main--${repo}--${owner}.hlx.page`;
-
-
-
 export const [setLibs, getLibs] = (() => {
   let libs;
   return [
@@ -38,18 +29,28 @@ export const [setLibs, getLibs] = (() => {
         return libs;
       }
       const { hostname } = window.location;
-      if (!hostname.includes('hlx.page')
-        && !hostname.includes('hlx.live')
-        && !hostname.includes('localhost')) {
+      if (
+        !hostname.includes('hlx.page') &&
+        !hostname.includes('hlx.live') &&
+        !hostname.includes('localhost')
+      ) {
         libs = prodLibs;
         return libs;
       }
-      const branch = new URLSearchParams(window.location.search).get('milolibs') || 'main';
-      if (branch === 'local') { libs = 'http://localhost:6456/libs'; return libs; }
-      if (branch.indexOf('--') > -1) { libs = `https://${branch}.hlx.live/libs`; return libs; }
+      const branch =
+        new URLSearchParams(window.location.search).get('milolibs') || 'main';
+      if (branch === 'local') {
+        libs = 'http://localhost:6456/libs';
+        return libs;
+      }
+      if (branch.indexOf('--') > -1) {
+        libs = `https://${branch}.hlx.live/libs`;
+        return libs;
+      }
       libs = `https://${branch}--milo--adobecom.hlx.live/libs`;
       return libs;
-    }, () => libs,
+    },
+    () => libs,
   ];
 })();
 
@@ -62,40 +63,38 @@ export function validateUser() {
   const urlParams = new URLSearchParams(window.location.search);
   const gtoken = urlParams.get('gtoken');
   const gid = urlParams.get('gid');
-  
+
   const response = new Promise((resolve) => {
     setTimeout(() => {
-        resolve(true);
+      resolve(true);
     }, 1000);
   });
   return response;
 }
 
-export function getParamsPlaceholders () {
+export function getParamsPlaceholders() {
   const urlParams = new URLSearchParams(window.location.search);
   const gtoken = urlParams.get('gtoken');
   const gid = urlParams.get('gid');
   return {
     gid,
     gtoken,
-  }
-}
-
-export function passParams(button) {
-  const urlParams = new URLSearchParams(window.location.search);
-  const gtoken = urlParams.get('gtoken');
-  const gid = urlParams.get('gid');
-  button.href = `${button.href}?gtoken=${gtoken}&gid=${gid}`
+  };
 }
 
 export async function getConfig() {
+  const DOT_MILO = '/.milo/config.json';
+  const urlParams = new URLSearchParams(window.location.search);
+  const owner = urlParams.get('owner') || 'adobecom';
+  const repo = urlParams.get('repo') || 'milo';
+  const origin = `https://main--${repo}--${owner}.hlx.page`;
   let configs = {};
   try {
     const resp = await fetch(`${origin}${DOT_MILO}`);
     const json = await resp.json();
     configs = json.configs?.data;
-  } catch(err) {
-    console.log(err, 'error')
+  } catch (err) {
+    console.log(err, 'error');
   }
   return configs;
 }

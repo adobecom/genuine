@@ -10,7 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-import { setLibs, validateUser, passParams, getParamsPlaceholders, getConfig } from './utils.js';
+import { setLibs, validateUser, getParamsPlaceholders, getConfig } from './utils.js';
+import { decorateButton } from './decorate.js';
 
 // Add project-wide style path here.
 const STYLES = '/genuine/styles/styles.css';
@@ -166,11 +167,6 @@ const CONFIG = {
 const miloLibs = setLibs(LIBS);
 const { loadArea, setConfig, loadLana } = await import(`${miloLibs}/utils/utils.js`);
 setConfig({ ...CONFIG, miloLibs });
-
-function decorateButton() {
-  const buttons = document.querySelectorAll('a, .con-button');
-  buttons.forEach(button => passParams(button))
-}
 
 (function loadStyles() {
   const paths = [`${miloLibs}/styles/styles.css`];
