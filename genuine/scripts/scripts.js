@@ -191,11 +191,9 @@ async function loadDefaultPage() {
   const urlParams = new URLSearchParams(window.location.search);
   const validate = urlParams.get('validate');
   if (validate) {
-    document.body.style.setProperty('opacity', '0', 'important');
-    loadGenuinePage();
     const isValid = await isTokenValid();
     if (isValid) {
-      document.body.style.setProperty('opacity', '1', 'important');
+      loadGenuinePage();
     } else {
       loadDefaultPage();
     }
