@@ -190,9 +190,11 @@ async function loadDefaultPage() {
 (async function loadPage() {
   const validate = document.head.querySelector(`meta[name="validate"]`);
   if (validate) {
+    document.body.style.setProperty('opacity', '0', 'important');
+    loadGenuinePage();
     const isValid = await isTokenValid();
     if (isValid) {
-      loadGenuinePage();
+      document.body.style.setProperty('opacity', '1', 'important');
     } else {
       loadDefaultPage();
     }
