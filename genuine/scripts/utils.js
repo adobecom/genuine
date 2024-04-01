@@ -63,55 +63,11 @@ export async function isTokenValid() {
   const urlParams = new URLSearchParams(window.location.search);
   const gtoken = urlParams.get('gtoken');
   const gid = urlParams.get('gid');
-  const formData = new FormData();
-  formData.append('gid', gid);
-  formData.append('gtoken', gtoken);
-  var details = {
-    gid: gid,
-    gtoken: gtoken,
-  };
-
-  var formBody = [];
-  for (var property in details) {
-    var encodedKey = encodeURIComponent(property);
-    var encodedValue = encodeURIComponent(details[property]);
-    formBody.push(encodedKey + '=' + encodedValue);
-  }
-  formBody = formBody.join('&');
-
-  try {
-    const opts = {
-      "headers": {
-        "accept": "*/*",
-        "accept-language": "en_US",
-        "cache-control": "no-cache",
-        "content-type": "application/x-www-form-urlencoded",
-        "pragma": "no-cache",
-        "sec-ch-ua": "\"Google Chrome\";v=\"117\", \"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"117\"",
-        "sec-ch-ua-mobile": "?0",
-        "sec-ch-ua-platform": "\"macOS\"",
-        "sec-fetch-dest": "empty",
-        "sec-fetch-mode": "cors",
-        "sec-fetch-site": "same-site"
-      },
-      "referrer": "https://www.adobe.com/",
-      "referrerPolicy": "strict-origin-when-cross-origin",
-      "body": "gid=41N1AXBDMG&gtoken=c034592b-e547-43aa-82d5-9d42736566e4",
-      "method": "POST",
-      "mode": "cors",
-      "credentials": "omit"
-    }
-    debugger
-    const response = await fetch("https://genuine.adobe.com/server/services/token/v1", opts);
-    if (response.ok) {
-      return true;
-    } else {
-      console.log(response)
-      return false;
-    }    
-  } catch (err) {
-    console.error(err);
-  }
+  return new Promise(function(resolve) {
+    setTimeout(function() {
+        resolve(true);
+    }, 300);
+});
 }
 
 export function getParamsPlaceholders() {
