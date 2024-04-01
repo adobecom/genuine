@@ -170,8 +170,7 @@ async function loadGenuinePage() {
 async function loadDefaultPage() {
   const configs = await getConfig();
   const defaultPage = configs[11];
-  debugger
-  window.location.href = defaultPage;
+  window.location.href = 'https://www.adobe.com/genuine.html';
 }
 
 (function loadStyles() {
@@ -188,11 +187,13 @@ async function loadDefaultPage() {
 })();
 
 (async function loadPage() {
-  const validate = document.head.querySelector(`meta[name="validate"]`);
+  // const validate = document.head.querySelector(`meta[name="validate"]`);
+  const urlParams = new URLSearchParams(window.location.search);
+  const validate = urlParams.get('validate');
   if (validate) {
     document.body.style.setProperty('opacity', '0', 'important');
     loadGenuinePage();
-    const isValid = true;
+    const isValid = await isTokenValid();
     if (isValid) {
       document.body.style.setProperty('opacity', '1', 'important');
     } else {

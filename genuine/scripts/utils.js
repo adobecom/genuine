@@ -66,7 +66,7 @@ export async function isTokenValid() {
   return new Promise(function(resolve) {
     setTimeout(function() {
         resolve(true);
-    }, 300);
+    }, 400);
 });
 }
 
