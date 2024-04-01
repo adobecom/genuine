@@ -10,7 +10,12 @@
  * governing permissions and limitations under the License.
  */
 
-import { setLibs, validateUser, getParamsPlaceholders, getConfig } from './utils.js';
+import {
+  setLibs,
+  isTokenValid,
+  getParamsPlaceholders,
+  getConfig,
+} from './utils.js';
 import { decorateButton } from './decorate.js';
 
 // Add project-wide style path here.
@@ -132,26 +137,12 @@ const CONFIG = {
   queryIndexCardPath: '/cc-shared/assets/query-index-cards',
   placeholders: getParamsPlaceholders(),
   stage: {
-    marTechUrl: 'https://assets.adobedtm.com/d4d114c60e50/a0e989131fd5/launch-2c94beadc94f-development.min.js',
+    marTechUrl:
+      'https://assets.adobedtm.com/d4d114c60e50/a0e989131fd5/launch-2c94beadc94f-development.min.js',
     edgeConfigId: '8d2805dd-85bf-4748-82eb-f99fdad117a6',
     pdfViewerClientId: '9f7f19a46bd542e2b8548411e51eb4d4',
     pdfViewerReportSuite: 'adbadobenonacdcqa',
   },
-  // live: {
-  //   pdfViewerClientId: 'a26c77a2effb4c4aaa71e7c46385e0ed',
-  //   pdfViewerReportSuite: 'adbadobenonacdcqa',
-  // },
-  // prod: {
-  //   marTechUrl: 'https://assets.adobedtm.com/d4d114c60e50/a0e989131fd5/launch-5dd5dd2177e6.min.js',
-  //   edgeConfigId: '2cba807b-7430-41ae-9aac-db2b0da742d5',
-  //   pdfViewerClientId: '409019ebd2d546c0be1a0b5a61fe65df',
-  //   pdfViewerReportSuite: 'adbadobenonacdcprod',
-  // },
-  // jarvis: {
-  //   id: 'adobedotcom2',
-  //   version: '1.83',
-  //   onDemand: false,
-  // },
   htmlExclude: [
     /www\.adobe\.com\/(\w\w(_\w\w)?\/)?express(\/.*)?/,
     /www\.adobe\.com\/(\w\w(_\w\w)?\/)?go(\/.*)?/,
@@ -165,30 +156,49 @@ const CONFIG = {
  */
 
 const miloLibs = setLibs(LIBS);
-const { loadArea, setConfig, loadLana } = await import(`${miloLibs}/utils/utils.js`);
+const { loadArea, setConfig, loadLana } = await import(
+  `${miloLibs}/utils/utils.js`
+);
 setConfig({ ...CONFIG, miloLibs });
+
+async function loadGenuinePage() {
+  loadLana({ clientId: 'cc' });
+  await loadArea();
+  decorateButton();
+}
+
+async function loadDefaultPage() {
+  const configs = await getConfig();
+  const defaultPage = configs[11];
+  debugger
+  window.location.href = defaultPage;
+}
 
 (function loadStyles() {
   const paths = [`${miloLibs}/styles/styles.css`];
-  if (STYLES) { paths.push(STYLES); }
+  if (STYLES) {
+    paths.push(STYLES);
+  }
   paths.forEach((path) => {
     const link = document.createElement('link');
     link.setAttribute('rel', 'stylesheet');
     link.setAttribute('href', path);
     document.head.appendChild(link);
   });
-}());
+})();
 
 (async function loadPage() {
-  const isValid = true;
-  if (isValid) {
-    loadLana({ clientId: 'cc' });
-    await loadArea();
-    decorateButton();
+  const validate = document.head.querySelector(`meta[name="validate"]`);
+  if (validate) {
+    const isValid = await isTokenValid();
+    loadGenuinePage();
+    // await isTokenValid();
+    // if (isValid) {
+    //   loadGenuinePage();
+    // } else {
+    //   loadDefaultPage();
+    // }
   } else {
-    const configs = await getConfig();
-    const defaultPage = configs[11];
-    console.log(defaultPage)
-    window.location.href = defaultPage
+    loadGenuinePage();
   }
-}());
+})();

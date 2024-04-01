@@ -59,17 +59,43 @@ const miloLibs = setLibs('/libs');
 const { createTag, localizeLink } = await import(`${miloLibs}/utils/utils.js`);
 export { createTag, localizeLink };
 
-export function validateUser() {
+export async function isTokenValid() {
   const urlParams = new URLSearchParams(window.location.search);
   const gtoken = urlParams.get('gtoken');
   const gid = urlParams.get('gid');
+  const formData = new FormData();
+  formData.append('gid', gid);
+  formData.append('gtoken', gtoken);
+  var details = {
+    gid: gid,
+    gtoken: gtoken,
+  };
 
-  const response = new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(true);
-    }, 1000);
-  });
-  return response;
+  var formBody = [];
+  for (var property in details) {
+    var encodedKey = encodeURIComponent(property);
+    var encodedValue = encodeURIComponent(details[property]);
+    formBody.push(encodedKey + '=' + encodedValue);
+  }
+  formBody = formBody.join('&');
+
+  try {
+    const response = await fetch(
+      'https://genuine.adobe.com/server/services/token/v1',
+      {
+        body: 'gid=41N1AXBDMG&gtoken=c034592b-e547-43aa-82d5-9d42736566e4',
+        method: 'POST',
+      }
+    );
+    if (response.ok) {
+      return true;
+    } else {
+      console.log(response)
+      return false;
+    }    
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 export function getParamsPlaceholders() {
