@@ -170,7 +170,7 @@ async function loadGenuinePage() {
 async function loadDefaultPage() {
   const configs = await getConfig();
   const defaultPage = configs[11];
-  window.location.href = 'https://www.adobe.com/genuine.html';
+  window.location.href = defaultPage;
 }
 
 (function loadStyles() {
@@ -186,19 +186,31 @@ async function loadDefaultPage() {
   });
 })();
 
+const eagerLoad = (img) => {
+  img?.setAttribute('loading', 'eager');
+  img?.setAttribute('fetchpriority', 'high');
+};
+
+(async function loadLCPImage() {
+  const firstDiv = document.querySelector('body > main > div:nth-child(1) > div');
+  if (firstDiv?.classList.contains('marquee')) {
+    firstDiv.querySelectorAll('img').forEach(eagerLoad);
+  } else {
+    eagerLoad(document.querySelector('img'));
+  }
+}());
+
 (async function loadPage() {
-  // const validate = document.head.querySelector(`meta[name="validate"]`);
-  const urlParams = new URLSearchParams(window.location.search);
-  const validate = urlParams.get('validate');
+  const validate = document.head.querySelector(`meta[name="validate"]`);
   if (validate) {
-    document.body.style.setProperty('opacity', '0', 'important');
-    loadGenuinePage();
     const isValid = await isTokenValid();
-    if (isValid) {
-      document.body.style.setProperty('opacity', '1', 'important');
-    } else {
-      loadDefaultPage();
-    }
+    loadGenuinePage();
+    // await isTokenValid();
+    // if (isValid) {
+    //   loadGenuinePage();
+    // } else {
+    //   loadDefaultPage();
+    // }
   } else {
     loadGenuinePage();
   }
