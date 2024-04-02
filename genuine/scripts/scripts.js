@@ -191,13 +191,11 @@ async function loadDefaultPage() {
   const validate = document.head.querySelector(`meta[name="validate"]`);
   if (validate) {
     const isValid = await isTokenValid();
-    loadGenuinePage();
-    // await isTokenValid();
-    // if (isValid) {
-    //   loadGenuinePage();
-    // } else {
-    //   loadDefaultPage();
-    // }
+    if (isValid) {
+      loadGenuinePage();
+    } else {
+      loadDefaultPage();
+    }
   } else {
     loadGenuinePage();
   }
