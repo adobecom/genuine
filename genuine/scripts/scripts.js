@@ -167,12 +167,6 @@ async function loadGenuinePage() {
   decorateButton();
 }
 
-async function loadDefaultPage() {
-  const configs = await getConfig();
-  const defaultPage = configs[11];
-  window.location.href = defaultPage;
-}
-
 (function loadStyles() {
   const paths = [`${miloLibs}/styles/styles.css`];
   if (STYLES) {
@@ -201,17 +195,21 @@ const eagerLoad = (img) => {
 }());
 
 (async function loadPage() {
-  const validate = document.head.querySelector(`meta[name="validate"]`);
+  const urlParams = new URLSearchParams(window.location.search);
+  const validate = urlParams.get('validate');
+
+  // const validate = document.head.querySelector(`meta[name="validate"]`);
+  document.body.style.setProperty('opacity', '0.1', 'important');
+  loadGenuinePage();
   if (validate) {
     const isValid = await isTokenValid();
-    loadGenuinePage();
-    // await isTokenValid();
-    // if (isValid) {
-    //   loadGenuinePage();
-    // } else {
-    //   loadDefaultPage();
-    // }
+    if (isValid) {
+      document.body.style.setProperty('opacity', '1', 'important');
+    } else {
+      const defaultPage = 'https://www.adobe.com/genuine.html'
+      window.location.href = defaultPage;
+    }
   } else {
-    loadGenuinePage();
+    document.body.style.setProperty('opacity', '1', 'important');
   }
 })();
