@@ -167,12 +167,6 @@ async function loadGenuinePage() {
   decorateButton();
 }
 
-async function loadDefaultPage() {
-  const configs = await getConfig();
-  const defaultPage = configs[11];
-  window.location.href = defaultPage;
-}
-
 (function loadStyles() {
   const paths = [`${miloLibs}/styles/styles.css`];
   if (STYLES) {
@@ -201,16 +195,17 @@ const eagerLoad = (img) => {
 }());
 
 (async function loadPage() {
-  const validate = document.head.querySelector(`meta[name="validate"]`);
+  const urlParams = new URLSearchParams(window.location.search);
+  const validate = urlParams.get('validate');
+  
   if (validate) {
     const isValid = await isTokenValid();
-    loadGenuinePage();
-    // await isTokenValid();
-    // if (isValid) {
-    //   loadGenuinePage();
-    // } else {
-    //   loadDefaultPage();
-    // }
+    if (isValid) {
+      loadGenuinePage();
+    } else {
+      const defaultPage = 'https://www.adobe.com/genuine.html'
+      window.location.href = defaultPage;
+    }
   } else {
     loadGenuinePage();
   }
