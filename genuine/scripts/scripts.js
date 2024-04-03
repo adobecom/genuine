@@ -24,6 +24,8 @@ const STYLES = '/genuine/styles/styles.css';
 // Use '/libs' if your live site maps '/libs' to milo's origin.
 const LIBS = '/libs';
 
+const defaultPage = 'https://www.adobe.com/genuine.html'
+
 const locales = {
   // Americas
   ar: { ietf: 'es-AR', tk: 'oln4yqj.css' },
@@ -167,13 +169,6 @@ async function loadGenuinePage() {
   decorateButton();
 }
 
-async function loadDefaultPage() {
-  const configs = await getConfig();
-  const defaultPage = configs[11];
-  debugger
-  window.location.href = defaultPage;
-}
-
 (function loadStyles() {
   const paths = [`${miloLibs}/styles/styles.css`];
   if (STYLES) {
@@ -194,7 +189,7 @@ async function loadDefaultPage() {
     if (isValid) {
       loadGenuinePage();
     } else {
-      loadDefaultPage();
+      window.location.href = defaultPage;
     }
   } else {
     loadGenuinePage();
