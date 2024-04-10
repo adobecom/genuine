@@ -13,7 +13,7 @@
 import {
   setLibs,
   isTokenValid,
-  getParamsPlaceholders,
+  getUrlParams,
   getConfig,
 } from './utils.js';
 import { decorateButton } from './decorate.js';
@@ -137,7 +137,7 @@ const CONFIG = {
   geoRouting: 'on',
   prodDomains: ['www.adobe.com', 'helpx.adobe.com', 'business.adobe.com'],
   queryIndexCardPath: '/cc-shared/assets/query-index-cards',
-  placeholders: getParamsPlaceholders(),
+  placeholders: getUrlParams(),
   stage: {
     marTechUrl:
       'https://assets.adobedtm.com/d4d114c60e50/a0e989131fd5/launch-2c94beadc94f-development.min.js',
@@ -166,7 +166,7 @@ setConfig({ ...CONFIG, miloLibs });
 async function loadGenuinePage() {
   loadLana({ clientId: 'cc' });
   await loadArea();
-  decorateButton();
+  // decorateButton();
 }
 
 (function loadStyles() {
