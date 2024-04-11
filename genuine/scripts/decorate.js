@@ -1,26 +1,22 @@
 import { getUrlParams } from './utils.js';
 
 function goCartLinkAppend(link, paramsValue) {
-  const appendString = Object.keys(paramsValue)
-    .map(key => `${key}=${paramsValue[key]}`)
-    .join('&');
-
-  let url;
   try {
-    url = new URL(link.getAttribute('href'));
+    const url = new URL(link.getAttribute('href'));
+    const urlSearchParams = new URLSearchParams(url.search);
+    
+    Object.keys(paramsValue).forEach(key => {
+      if (!urlSearchParams.has(key)) {
+        urlSearchParams.append(key, paramsValue[key]);
+      }
+    });
+    
+    const searchParamsString = urlSearchParams.toString();
+    const divider = (searchParamsString !== '') ? '&' : '?';
+    link.setAttribute('href', `${url.origin}${url.pathname}${url.search}${divider}${searchParamsString}${url.hash}`);
   } catch (error) {
     console.log(`goCartLinkAppend: Could not append link for ${link}, invalid URL`);
-    return;
   }
-  const divider = (url.search !== '') ? '&' : '?';
-  link.setAttribute('href', `${url.origin}${url.pathname}${url.search}${appendString ? divider : ''}${appendString}${url.hash}`);
-}
-
-function passParams(button) {
-  const urlParams = new URLSearchParams(window.location.search);
-  const gtoken = urlParams.get('gtoken');
-  const gid = urlParams.get('gid');
-  button.href = `${button.href}?gtoken=${gtoken}&gid=${gid}`
 }
 
 export function decorateButton() {

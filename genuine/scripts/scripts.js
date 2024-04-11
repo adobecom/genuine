@@ -14,7 +14,6 @@ import {
   setLibs,
   isTokenValid,
   getUrlParams,
-  getConfig,
 } from './utils.js';
 import { decorateButton } from './decorate.js';
 
@@ -166,7 +165,7 @@ setConfig({ ...CONFIG, miloLibs });
 async function loadGenuinePage() {
   loadLana({ clientId: 'cc' });
   await loadArea();
-  // decorateButton();
+  decorateButton();
 }
 
 (function loadStyles() {

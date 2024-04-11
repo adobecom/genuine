@@ -19,8 +19,8 @@
 /**
  * The decision engine for where to get Milo's libs from.
  */
-export const GOCART_PARAM_KEYS = ['gid', 'gtoken', 'sdid', 'cohortid', 'timer', 'gcsrc', 'gcprog', 'gcprogcat', 'gcpagetype', 'language'];
-export const GOCART_APPEND_LINK_PARAM_STORE = {};
+export const GOCART_PARAM_KEYS = ['gid', 'gtoken', 'sdid', 'cohortid', 'timer', 'gcsrc', 'gcprog', 'gcprogcat', 'gcpagetype', 'language', 'productname', 'daysremaining'];
+
 export const [setLibs, getLibs] = (() => {
   let libs;
   return [
