@@ -129,13 +129,12 @@ const locales = {
 
 // Add any config options.
 const CONFIG = {
-  contentRoot: '/cc-shared',
+  contentRoot: '/genuine-content',
   codeRoot: '/genuine',
   imsClientId: 'adobedotcom-cc',
   locales,
   geoRouting: 'on',
-  prodDomains: ['www.adobe.com', 'helpx.adobe.com', 'business.adobe.com'],
-  queryIndexCardPath: '/cc-shared/assets/query-index-cards',
+  prodDomains: ['www.adobe.com', 'helpx.adobe.com', 'business.adobe.com', 'genuine.adobe.com'],
   placeholders: getUrlParams(),
   stage: {
     marTechUrl:
@@ -144,10 +143,12 @@ const CONFIG = {
     pdfViewerClientId: '9f7f19a46bd542e2b8548411e51eb4d4',
     pdfViewerReportSuite: 'adbadobenonacdcqa',
   },
-  htmlExclude: [
-    /www\.adobe\.com\/(\w\w(_\w\w)?\/)?express(\/.*)?/,
-    /www\.adobe\.com\/(\w\w(_\w\w)?\/)?go(\/.*)?/,
-  ],
+  prod: {
+    marTechUrl: 'https://assets.adobedtm.com/d4d114c60e50/a0e989131fd5/launch-5dd5dd2177e6.min.js',
+    edgeConfigId: '2cba807b-7430-41ae-9aac-db2b0da742d5',
+    pdfViewerClientId: '409019ebd2d546c0be1a0b5a61fe65df',
+    pdfViewerReportSuite: 'adbadobenonacdcprod',
+  },
 };
 
 /*
