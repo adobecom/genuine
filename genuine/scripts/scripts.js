@@ -186,12 +186,11 @@ async function loadGenuinePage() {
   const validate = document.head.querySelector(`meta[name="validate"]`);
   if (validate) {
     const isValid = await isTokenValid();
-    loadGenuinePage();
-    // if (isValid) {
-    //   loadGenuinePage();
-    // } else {
-    //   // window.location.href = defaultPage;
-    // }
+    if (isValid) {
+      loadGenuinePage();
+    } else {
+      window.location.href = defaultPage;
+    }
   } else {
     loadGenuinePage();
   }
