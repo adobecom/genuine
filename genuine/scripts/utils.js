@@ -121,7 +121,7 @@ export async function isTokenValid() {
       method: 'POST',
     };
 
-    const response = await fetch("https://genuine.adobe.com/server/services/token/v1", opts);
+    const response = await fetch("https://gc-stage.licenses.adobe.com/server/services/token/v1", opts);
     return response.ok;
   } catch (err) {
     console.error(err);
