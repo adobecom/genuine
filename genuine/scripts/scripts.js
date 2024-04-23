@@ -23,8 +23,6 @@ const STYLES = '/genuine/styles/styles.css';
 // Use '/libs' if your live site maps '/libs' to milo's origin.
 const LIBS = '/libs';
 
-const defaultPage = 'https://www.adobe.com/genuine.html'
-
 const locales = {
   // Americas
   ar: { ietf: 'es-AR', tk: 'oln4yqj.css' },
@@ -161,6 +159,7 @@ const miloLibs = setLibs(LIBS);
 const { loadArea, setConfig, loadLana } = await import(
   `${miloLibs}/utils/utils.js`
 );
+
 setConfig({ ...CONFIG, miloLibs });
 
 async function loadGenuinePage() {
@@ -184,14 +183,16 @@ async function loadGenuinePage() {
 
 (async function loadPage() {
   const validate = document.head.querySelector(`meta[name="validate"]`);
-  if (validate) {
+  if (validate.content === 'on') {
     const isValid = await isTokenValid();
     if (isValid) {
       loadGenuinePage();
     } else {
-      window.location.href = defaultPage;
+      const defaultPage = document.head.querySelector(`meta[name="default-page"]`);
+      window.location.href = defaultPage?.content || 'https://www.adobe.com/genuine.html';
     }
   } else {
     loadGenuinePage();
   }
 })();
+

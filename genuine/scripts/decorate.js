@@ -12,8 +12,7 @@ function goCartLinkAppend(link, paramsValue) {
     });
     
     const searchParamsString = urlSearchParams.toString();
-    const divider = (searchParamsString !== '') ? '&' : '?';
-    link.setAttribute('href', `${url.origin}${url.pathname}${url.search}${divider}${searchParamsString}${url.hash}`);
+    link.setAttribute('href', `${url.origin}${url.pathname}?${searchParamsString}${url.hash}`);
   } catch (error) {
     console.log(`goCartLinkAppend: Could not append link for ${link}, invalid URL`);
   }

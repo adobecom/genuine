@@ -97,9 +97,13 @@ export function getUrlParams() {
 }
 
 export async function isTokenValid() {
+  const getServiceConfig = await import(
+    `${miloLibs}/utils/service-config.js`
+  );
   const urlParams = new URLSearchParams(window.location.search);
   const gtoken = urlParams.get('gtoken');
   const gid = urlParams.get('gid');
+  const { gocart } = await getServiceConfig.default(window.location.origin);
 
   const params = {
     gid,
@@ -121,7 +125,7 @@ export async function isTokenValid() {
       method: 'POST',
     };
 
-    const response = await fetch("https://gc-stage.licenses.adobe.com/server/services/token/v1", opts);
+    const response = await fetch(gocart.url, opts);
     return response.ok;
   } catch (err) {
     console.error(err);
@@ -129,20 +133,3 @@ export async function isTokenValid() {
   }
 }
 
-
-export async function getConfig() {
-  const DOT_MILO = '/.milo/config.json';
-  const urlParams = new URLSearchParams(window.location.search);
-  const owner = urlParams.get('owner') || 'adobecom';
-  const repo = urlParams.get('repo') || 'milo';
-  const origin = `https://main--${repo}--${owner}.hlx.page`;
-  let configs = {};
-  try {
-    const resp = await fetch(`${origin}${DOT_MILO}`);
-    const json = await resp.json();
-    configs = json.configs?.data;
-  } catch (err) {
-    console.log(err, 'error');
-  }
-  return configs;
-}
