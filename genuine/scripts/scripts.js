@@ -22,6 +22,7 @@ const STYLES = '/genuine/styles/styles.css';
 
 // Use '/libs' if your live site maps '/libs' to milo's origin.
 const LIBS = '/libs';
+const noRedirect = new URLSearchParams(window.location.search).get('noRedirect');
 
 const locales = {
   // Americas
@@ -188,8 +189,12 @@ async function loadGenuinePage() {
     if (isValid) {
       loadGenuinePage();
     } else {
-      const defaultPage = document.head.querySelector(`meta[name="default-page"]`);
-      window.location.href = defaultPage?.content || 'https://www.adobe.com/genuine.html';
+      if (noRedirect) { //For debugging
+         loadGenuinePage();
+      } else {
+        const defaultPage = document.head.querySelector(`meta[name="default-page"]`);
+        window.location.href = defaultPage?.content || 'https://www.adobe.com/genuine.html';
+      }
     }
   } else {
     loadGenuinePage();

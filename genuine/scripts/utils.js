@@ -97,13 +97,13 @@ export function getUrlParams() {
 }
 
 export async function isTokenValid() {
-  const getServiceConfig = await import(
+  const { default: getServiceConfig } = await import(
     `${miloLibs}/utils/service-config.js`
   );
   const urlParams = new URLSearchParams(window.location.search);
   const gtoken = urlParams.get('gtoken');
   const gid = urlParams.get('gid');
-  const { gocart } = await getServiceConfig.default(window.location.origin);
+  const { gocart } = await getServiceConfig(window.location.origin);
 
   const params = {
     gid,
