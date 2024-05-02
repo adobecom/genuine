@@ -17,10 +17,13 @@
  */
 
 /**
- * The decision engine for where to get Milo's libs from.
+ * Genuine pages param keys
  */
 export const GOCART_PARAM_KEYS = ['gid', 'gtoken', 'sdid', 'cohortid', 'timer', 'gcsrc', 'gcprog', 'gcprogcat', 'gcpagetype', 'language', 'productname', 'daysremaining'];
 
+/**
+ * The decision engine for where to get Milo's libs from.
+ */
 export const [setLibs, getLibs] = (() => {
   let libs;
   return [
@@ -105,13 +108,8 @@ export async function isTokenValid() {
   const gid = urlParams.get('gid');
   const { gocart } = await getServiceConfig(window.location.origin);
 
-  const params = {
-    gid,
-    gtoken,
-  };
-
   let formBody = [];
-  for (const [key, value] of Object.entries(params)) {
+  for (const [key, value] of Object.entries({ gid, gtoken })) {
     formBody.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
   }
   formBody = formBody.join('&');
@@ -128,7 +126,6 @@ export async function isTokenValid() {
     const response = await fetch(gocart.url, opts);
     return response.ok;
   } catch (err) {
-    console.error(err);
     return false;
   }
 }

@@ -184,20 +184,10 @@ async function loadGenuinePage() {
 
 (async function loadPage() {
   const validate = document.head.querySelector(`meta[name="validate"]`);
-  if (validate.content === 'on') {
-    const isValid = await isTokenValid();
-    if (isValid) {
-      loadGenuinePage();
-    } else {
-      if (noRedirect) { //For debugging
-         loadGenuinePage();
-      } else {
-        const defaultPage = document.head.querySelector(`meta[name="default-page"]`);
-        window.location.href = defaultPage?.content || 'https://www.adobe.com/genuine.html';
-      }
-    }
-  } else {
-    loadGenuinePage();
+  if (validate?.content === 'on') {
+    if (await isTokenValid() || noRedirect) return loadGenuinePage();
+    const defaultPage = document.head.querySelector(`meta[name="default-page"]`);
+    window.location.href = defaultPage?.content || 'https://www.adobe.com/genuine.html';
   }
+  loadGenuinePage();
 })();
-
