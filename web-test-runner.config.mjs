@@ -33,7 +33,7 @@ const swcImportMaps = Object.fromEntries([
 
 export default {
   coverageConfig: {
-    include: ['src/**'],
+    include: ['genuine/scripts/scripts.js'],
     exclude: ['test/mocks/**', 'test/**', '**/node_modules/**'],
   },
   debug: false,
@@ -43,4 +43,5 @@ export default {
   plugins: [importMapsPlugin({ inject: { importMap: { imports: { ...swcImportMaps } } } })],
   port: 2000,
   browserLogs: false,
+  global: { window: { location: { search: '?param1=value1&param2=value2' } } },
 };
