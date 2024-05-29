@@ -12,9 +12,11 @@
 
 import {
   setLibs,
-  isTokenValid,
   getUrlParams,
 } from './utils.js';
+
+import { isTokenValid } from './goCart.js';
+
 import { decorateButton } from './decorate.js';
 
 // Add project-wide style path here.
@@ -185,7 +187,7 @@ async function loadGenuinePage() {
 (async function loadPage() {
   const validate = document.head.querySelector(`meta[name="validate"]`);
   if (validate?.content === 'on') {
-    if (await isTokenValid() || noRedirect) return loadGenuinePage();
+    if (await isTokenValid(miloLibs) || noRedirect) return loadGenuinePage();
     const defaultPage = document.head.querySelector(`meta[name="default-page"]`);
     window.location.href = defaultPage?.content || 'https://www.adobe.com/genuine.html';
   }
