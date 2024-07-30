@@ -12,12 +12,12 @@
 
 import {
   setLibs,
-  isTokenValid,
   getUrlParams,
 } from './utils.js';
-import { decorateButton } from './decorate.js';
 
-// Add project-wide style path here.
+import { isTokenValid } from './goCart.js';
+
+import { decorateButton } from './decorate.js';
 const STYLES = '/genuine/styles/styles.css';
 
 // Use '/libs' if your live site maps '/libs' to milo's origin.
@@ -148,6 +148,11 @@ const CONFIG = {
     pdfViewerClientId: '409019ebd2d546c0be1a0b5a61fe65df',
     pdfViewerReportSuite: 'adbadobenonacdcprod',
   },
+  jarvis: {
+    id: 'adobedotcom2',
+    version: '1.83',
+    onDemand: false,
+  },
 };
 
 /*
@@ -185,7 +190,7 @@ async function loadGenuinePage() {
 (async function loadPage() {
   const validate = document.head.querySelector(`meta[name="validate"]`);
   if (validate?.content === 'on') {
-    if (await isTokenValid() || noRedirect) return loadGenuinePage();
+    if (await isTokenValid(miloLibs) || noRedirect) return loadGenuinePage();
     const defaultPage = document.head.querySelector(`meta[name="default-page"]`);
     window.location.href = defaultPage?.content || 'https://www.adobe.com/genuine.html';
   }
