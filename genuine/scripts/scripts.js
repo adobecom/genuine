@@ -15,12 +15,13 @@ import { setLibs, getUrlParams } from './utils.js';
 import { isTokenValid, loadBFP } from './goCart.js';
 
 import { decorateButton } from './decorate.js';
+
 const STYLES = '/genuine/styles/styles.css';
 
 // Use '/libs' if your live site maps '/libs' to milo's origin.
 const LIBS = '/libs';
 const noRedirect = new URLSearchParams(window.location.search).get(
-  'noRedirect'
+  'noRedirect',
 );
 
 const locales = {
@@ -196,17 +197,20 @@ async function loadGenuinePage() {
     link.setAttribute('href', path);
     document.head.appendChild(link);
   });
-})();
+}());
 
 (async function loadPage() {
-  const validate = document.head.querySelector(`meta[name="validate"]`);
+  const validate = document.head.querySelector('meta[name="validate"]');
   if (validate?.content === 'on') {
-    if ((await isTokenValid(miloLibs)) || noRedirect) return loadGenuinePage();
+    if ((await isTokenValid(miloLibs)) || noRedirect) {
+      loadGenuinePage();
+      return;
+    }
     const defaultPage = document.head.querySelector(
-      `meta[name="default-page"]`
+      'meta[name="default-page"]',
     );
-    window.location.href =
-      defaultPage?.content || 'https://www.adobe.com/genuine.html';
+    window.location.href = defaultPage?.content || 'https://www.adobe.com/genuine.html';
+    return;
   }
   loadGenuinePage();
-})();
+}());
