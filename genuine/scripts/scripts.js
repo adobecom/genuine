@@ -10,19 +10,18 @@
  * governing permissions and limitations under the License.
  */
 
-import {
-  setLibs,
-  getUrlParams,
-} from './utils.js';
+import { setLibs, getUrlParams } from './utils.js';
 
-import { isTokenValid } from './goCart.js';
+import { isTokenValid, loadBFP } from './goCart.js';
 
 import { decorateButton } from './decorate.js';
 const STYLES = '/genuine/styles/styles.css';
 
 // Use '/libs' if your live site maps '/libs' to milo's origin.
 const LIBS = '/libs';
-const noRedirect = new URLSearchParams(window.location.search).get('noRedirect');
+const noRedirect = new URLSearchParams(window.location.search).get(
+  'noRedirect'
+);
 
 const locales = {
   // Americas
@@ -133,7 +132,12 @@ const CONFIG = {
   imsClientId: 'adobedotcom-cc',
   locales,
   geoRouting: 'on',
-  prodDomains: ['www.adobe.com', 'helpx.adobe.com', 'business.adobe.com', 'genuine.adobe.com'],
+  prodDomains: [
+    'www.adobe.com',
+    'helpx.adobe.com',
+    'business.adobe.com',
+    'genuine.adobe.com',
+  ],
   placeholders: getUrlParams(),
   stage: {
     marTechUrl:
@@ -143,7 +147,8 @@ const CONFIG = {
     pdfViewerReportSuite: 'adbadobenonacdcqa',
   },
   prod: {
-    marTechUrl: 'https://assets.adobedtm.com/d4d114c60e50/a0e989131fd5/launch-5dd5dd2177e6.min.js',
+    marTechUrl:
+      'https://assets.adobedtm.com/d4d114c60e50/a0e989131fd5/launch-5dd5dd2177e6.min.js',
     edgeConfigId: '2cba807b-7430-41ae-9aac-db2b0da742d5',
     pdfViewerClientId: '409019ebd2d546c0be1a0b5a61fe65df',
     pdfViewerReportSuite: 'adbadobenonacdcprod',
@@ -152,6 +157,11 @@ const CONFIG = {
     id: 'adobedotcom2',
     version: '1.83',
     onDemand: false,
+  },
+  bfp: {
+    stageURL: 'https://d1xt4lugbgfnx1.cloudfront.net/bfp-stg/v1/bfp.js',
+    prodURL: 'https://d1xt4lugbgfnx1.cloudfront.net/bfp/v1/bfp.js',
+    apiKey: 'genuine-bfp-milo',
   },
 };
 
@@ -172,6 +182,7 @@ async function loadGenuinePage() {
   loadLana({ clientId: 'genuine' });
   await loadArea();
   decorateButton();
+  loadBFP();
 }
 
 (function loadStyles() {
@@ -190,9 +201,12 @@ async function loadGenuinePage() {
 (async function loadPage() {
   const validate = document.head.querySelector(`meta[name="validate"]`);
   if (validate?.content === 'on') {
-    if (await isTokenValid(miloLibs) || noRedirect) return loadGenuinePage();
-    const defaultPage = document.head.querySelector(`meta[name="default-page"]`);
-    window.location.href = defaultPage?.content || 'https://www.adobe.com/genuine.html';
+    if ((await isTokenValid(miloLibs)) || noRedirect) return loadGenuinePage();
+    const defaultPage = document.head.querySelector(
+      `meta[name="default-page"]`
+    );
+    window.location.href =
+      defaultPage?.content || 'https://www.adobe.com/genuine.html';
   }
   loadGenuinePage();
 })();
