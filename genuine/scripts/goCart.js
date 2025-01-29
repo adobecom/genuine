@@ -39,8 +39,17 @@ export async function loadBFP() {
     } = getConfig();
 
     const isStage = env === 'stage';
+    const loadBFPScript = () => loadScript(isStage ? stageURL : prodURL, undefined, { mode: 'defer' });
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(async () => {
+        await loadBFPScript();
+      });
+    } else {
+      setTimeout(async () => {
+        await loadBFPScript();
+      }, 1);
+    }
 
-    await loadScript(isStage ? stageURL : prodURL);
     if (!window.BFPJS) throw new Error('Cannot load BFPJS script');
 
     const fp = await window.BFPJS.load({ debug: isStage, xApiKey: apiKey, env });
