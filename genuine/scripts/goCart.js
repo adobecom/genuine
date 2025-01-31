@@ -34,21 +34,22 @@ export async function loadBFP() {
   try {
     const { getConfig, loadScript } = await import(`${miloLibs}/utils/utils.js`);
     const {
-      env,
+      prodDomains,
       bfp: { apiKey, prodURL, stageURL },
     } = getConfig();
-
+    const env = window.origin.includes(prodDomains[0]) ? 'prod' : 'stage';
     const isStage = env === 'stage';
-    const loadBFPScript = () => loadScript(isStage ? stageURL : prodURL, undefined, { mode: 'defer' });
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(async () => {
-        await loadBFPScript();
-      });
-    } else {
-      setTimeout(async () => {
-        await loadBFPScript();
-      }, 1);
-    }
+
+    await new Promise((resolve, reject) => {
+      const loadBFPScript = () => {
+        loadScript(isStage ? stageURL : prodURL, undefined, { mode: 'defer' })
+          .then(resolve)
+          .catch(reject);
+      };
+
+      if ('requestIdleCallback' in window) requestIdleCallback(loadBFPScript);
+      else setTimeout(loadBFPScript, 1);
+    });
 
     if (!window.BFPJS) throw new Error('Cannot load BFPJS script');
 
