@@ -37,26 +37,27 @@ export async function loadBFP() {
       prodDomains,
       bfp: { apiKey, prodURL, stageURL },
     } = getConfig();
-    const env = window.origin.includes(prodDomains[0]) ? 'prod' : 'stage';
-    const isStage = env === 'stage';
+    let env = 'stage';
+    if (window.origin.includes(prodDomains[0])) env = 'prod';
+    else if (window.origin.includes('localhost')) env = 'dev';
 
-    const loadBFPScript = async () => {
-      await loadScript(isStage ? stageURL : prodURL, undefined, { mode: 'defer' });
-      if (!window.BFPJS) throw new Error('Cannot load BFPJS script');
+    const isProd = env === 'prod';
+    const scriptURL = isProd ? prodURL : stageURL;
 
-      window.BFPJS.load({ debug: isStage, xApiKey: apiKey, env: 'dev' }).then((fp) => {
-        fp.get().then((payload) => {
-          const umi = new URLSearchParams(window.location.search).get('umi');
-          if (umi) {
-            payload.deviceId = { type: 'umi', value: umi };
-          }
+    const loadBFPScript = () => loadScript(scriptURL, undefined, { mode: 'defer' })
+      .then(() => {
+        if (!window.BFPJS) throw new Error('Cannot load BFPJS script');
+        return window.BFPJS.load({ debug: !isProd, xApiKey: apiKey, env });
+      })
+      .then((fp) => fp.get())
+      .then((payload) => {
+        const umi = new URLSearchParams(window.location.search).get('umi');
+        if (umi) payload.deviceId = { type: 'umi', value: umi };
+        return window.BFPJS.publish(payload);
+      })
+      .catch((err) => window.lana?.log(`Browser Fingerprint load failed: ${err}`));
 
-          window.BFPJS.publish(payload);
-        });
-      });
-    };
-
-    setTimeout(loadBFPScript, 1);
+    ('requestIdleCallback' in window ? requestIdleCallback : setTimeout)(loadBFPScript, 1);
   } catch (err) {
     window.lana?.log(`Browser Fingerprint load failed: ${err}`);
   }
