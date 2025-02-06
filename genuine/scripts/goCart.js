@@ -57,7 +57,7 @@ export async function loadBFP() {
       })
       .catch((err) => window.lana?.log(`Browser Fingerprint load failed: ${err}`));
 
-    ('requestIdleCallback' in window ? requestIdleCallback : setTimeout)(loadBFPScript, 1);
+    setTimeout(loadBFPScript, 1);
   } catch (err) {
     window.lana?.log(`Browser Fingerprint load failed: ${err}`);
   }
