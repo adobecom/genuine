@@ -47,18 +47,21 @@ export async function loadBFP() {
     const loadBFPScript = () => loadScript(scriptURL, undefined, { mode: 'defer' })
       .then(() => {
         if (!window.BFPJS) throw new Error('Cannot load BFPJS script');
+
         return window.BFPJS.load({ debug: !isProd, xApiKey: apiKey, env });
       })
       .then((fp) => fp.get())
-      .then((payload) => {
+      .then(({ components, version }) => {
+        const payload = { ...components, version };
         const umi = new URLSearchParams(window.location.search).get('umi');
         if (umi) payload.deviceId = { type: 'umi', value: umi };
+
         return window.BFPJS.publish(payload);
       })
-      .catch((err) => window.lana?.log(`Browser Fingerprint load failed: ${err}`));
+      .catch((err) => window?.lana?.log(`Browser Fingerprint load failed: ${err}`));
 
     setTimeout(loadBFPScript, 1);
   } catch (err) {
-    window.lana?.log(`Browser Fingerprint load failed: ${err}`);
+    window?.lana?.log(`Browser Fingerprint load failed: ${err}`);
   }
 }
