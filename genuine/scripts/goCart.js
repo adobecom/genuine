@@ -60,7 +60,7 @@ export async function loadBFP() {
       })
       .catch((err) => window?.lana?.log(`Browser Fingerprint load failed: ${err}`));
 
-    setTimeout(loadBFPScript, 1);
+    setTimeout(loadBFPScript, 200);
   } catch (err) {
     window?.lana?.log(`Browser Fingerprint load failed: ${err}`);
   }
