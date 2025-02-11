@@ -14,7 +14,6 @@ export const mockRes = ({ payload, status = 200, ok = true } = {}) => new Promis
 export const mockFetch = (payload) => stub().callsFake(() => mockRes(payload));
 window.fetch = mockFetch({ payload: { data: '' } });
 
-
 function delay(ms) {
   return new Promise((res) => { setTimeout(() => { res(); }, ms); });
 }
