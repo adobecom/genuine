@@ -34,8 +34,8 @@ export const [setLibs, getLibs] = (() => {
       }
       const { hostname } = window.location;
       if (
-        !hostname.includes('hlx.page')
-        && !hostname.includes('hlx.live')
+        !(hostname.includes('hlx.page') || hostname.includes('aem.page'))
+        && !(hostname.includes('hlx.live') || hostname.includes('aem.live'))
         && !hostname.includes('localhost')
       ) {
         libs = prodLibs;
@@ -47,10 +47,10 @@ export const [setLibs, getLibs] = (() => {
         return libs;
       }
       if (branch.indexOf('--') > -1) {
-        libs = `https://${branch}.hlx.live/libs`;
+        libs = `https://${branch}.aem.live/libs`;
         return libs;
       }
-      libs = `https://${branch}--milo--adobecom.hlx.live/libs`;
+      libs = `https://${branch}--milo--adobecom.aem.live/libs`;
       return libs;
     },
     () => libs,
