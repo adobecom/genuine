@@ -41,8 +41,7 @@ export const [setLibs, getLibs] = (() => {
         libs = prodLibs;
         return libs;
       }
-      const branch =
-        new URLSearchParams(window.location.search).get('milolibs') || 'main';
+      const branch = new URLSearchParams(window.location.search).get('milolibs') || 'main';
       if (branch === 'local') {
         libs = 'http://localhost:6456/libs';
         return libs;
@@ -66,36 +65,31 @@ export { createTag, localizeLink };
 function getCountdown(timer) {
   const timerDate = new Date(timer);
 
-  if (isNaN(timerDate.getTime())) {
+  if (Number.isNaN(timerDate.getTime())) {
     return 0;
   }
 
   if (timer.endsWith('d')) {
     const countdown = parseInt(timer, 10);
-    return isNaN(countdown) ? 0 : countdown;
-  } else {
-    const now = new Date();
-    const daysRemaining = Math.round((timerDate - now) / (24 * 3600 * 1000));
-    return Math.max(daysRemaining, 0); 
+    return Number.isNaN(countdown) ? 0 : countdown;
   }
+  const now = new Date();
+  const daysRemaining = Math.round((timerDate - now) / (24 * 3600 * 1000));
+  return Math.max(daysRemaining, 0);
 }
 
 function getParamValue(val) {
   let paramValue = (new URLSearchParams(window.location.search)).get(val);
-  if (val === 'timer' && paramValue ) {
+  if (val === 'timer' && paramValue) {
     paramValue = getCountdown(paramValue);
   }
   return paramValue;
 }
 
 export function getUrlParams() {
-  const params = {};
-  for (const key of GOCART_PARAM_KEYS) {
+  return GOCART_PARAM_KEYS.reduce((acc, key) => {
     const paramValue = getParamValue(key);
-    if (paramValue) {
-      params[key] = paramValue;
-    }
-  }
-  return params;
+    if (paramValue) acc[key] = paramValue;
+    return acc;
+  }, {});
 }
-
