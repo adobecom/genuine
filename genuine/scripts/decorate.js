@@ -19,9 +19,9 @@ function goCartLinkAppend(link, paramsValue) {
 }
 
 export function decorateButton() {
-  const buttons = document.querySelectorAll('a.con-button');
+  const links = document.querySelectorAll('a.con-button, a[href*="commerce.adobe.com"], a.image-link'); //remove comm links
   const paramsValue = getUrlParams();
-  buttons.forEach((button) => goCartLinkAppend(button, paramsValue));
+  links.forEach((link) => goCartLinkAppend(link, paramsValue));
 }
 
 export default {};
