@@ -1,4 +1,4 @@
-import { getLibs } from './utils.js';
+import { getLibs, getConfig } from './utils.js';
 
 const miloLibs = getLibs('/libs');
 
@@ -10,7 +10,8 @@ export async function isTokenValid() {
   const gtoken = urlParams.get('gtoken');
   const gid = urlParams.get('gid');
   const serviceName = urlParams.get('serviceName') || 'genuine';
-  const serviceConf = await getServiceConfig(window.location.origin);
+  const { codeRoot } = getConfig();
+  const serviceConf = await getServiceConfig(codeRoot);
 
   const formBody = Object.entries({ gid, gtoken })
     .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
