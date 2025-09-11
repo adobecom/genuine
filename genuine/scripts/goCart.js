@@ -33,7 +33,7 @@ export async function isTokenValid() {
 
 export async function loadBFP() {
   try {
-    const { getConfig, loadScript } = await import(`${miloLibs}/utils/utils.js`);
+    const { loadScript } = await import(`${miloLibs}/utils/utils.js`);
     const {
       prodDomains,
       bfp: { apiKey, prodURL, stageURL },
