@@ -19,7 +19,7 @@ function goCartLinkAppend(link, paramsValue) {
 }
 
 export function decorateButton() {
-  const links = document.querySelectorAll('a.con-button, a[href*="commerce.adobe.com"], a.image-link'); //remove comm links
+  const links = document.querySelectorAll('a.con-button, a.image-link');
   const paramsValue = getUrlParams();
   links.forEach((link) => goCartLinkAppend(link, paramsValue));
 }
