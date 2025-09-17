@@ -128,7 +128,7 @@ const locales = {
 
 // Add any config options.
 const CONFIG = {
-  contentRoot: '/genuine-content',
+  contentRoot: '/genuine-shared',
   codeRoot: '/genuine',
   imsClientId: 'adobedotcom-cc',
   locales,
