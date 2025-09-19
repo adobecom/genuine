@@ -21,8 +21,7 @@ function goCartLinkAppend(link, paramsValue) {
 export function decorateButton() {
   const links = document.querySelectorAll('a.con-button, a.image-link');
   const paramsValue = getUrlParams();
-  if (Object.keys(paramsValue).length > 0)
-    links.forEach((link) => goCartLinkAppend(link, paramsValue));
+  if (Object.keys(paramsValue).length > 0) links.forEach((link) => goCartLinkAppend(link, paramsValue));
 }
 
 export default {};
