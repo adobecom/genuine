@@ -19,7 +19,7 @@
 /**
  * Genuine pages param keys
  */
-export const GOCART_PARAM_KEYS = ['gid', 'gtoken', 'sdid', 'cohortid', 'timer', 'gcsrc', 'gcprog', 'gcprogcat', 'gcpagetype', 'language', 'productname', 'daysremaining'];
+export const GOCART_PARAM_KEYS = ['gid', 'gtoken', 'sdid', 'cohortid', 'timer', 'gcsrc', 'gcprog', 'gcprogcat', 'gcpagetype', 'language', 'productname', 'daysremaining', 'servicename', 'notifauditid'];
 
 /**
  * The decision engine for where to get Milo's libs from.
