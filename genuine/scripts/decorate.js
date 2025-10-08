@@ -20,8 +20,9 @@ function goCartLinkAppend(link, paramsValue) {
 
 export function decorateButton() {
   const links = document.querySelectorAll('a.con-button, a.image-link');
+  const cache = document.head.querySelector('meta[name="cache"]');
   const paramsValue = getUrlParams();
-  if (Object.keys(paramsValue).length > 0) {
+  if (cache?.content === 'on' && Object.keys(paramsValue).length > 0) {
     links.forEach((link) => goCartLinkAppend(link, paramsValue));
   }
 }
