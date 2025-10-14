@@ -2,7 +2,7 @@ import { getUrlParams } from './utils.js';
 
 function goCartLinkAppend(link, paramsValue) {
   try {
-    const url = new URL(link.getAttribute('href'));
+    const url = new URL(link.getAttribute('href'), window.location.origin);
     const urlSearchParams = new URLSearchParams(url.search);
 
     Object.keys(paramsValue).forEach((key) => {
