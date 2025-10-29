@@ -67,10 +67,17 @@ export async function loadBFP() {
       })
       .then((fp) => fp.get())
       .then(({ components, version }) => {
-        const payload = { ...components, version };
         const umi = new URLSearchParams(window.location.search).get('umi');
-        if (umi) payload.deviceId = { type: 'umi', value: umi };
-
+        if (umi) {
+          components.metaData = {
+            ...components.metaData,
+            meta: {
+              ...components.metaData?.meta,
+              deviceId: { type: 'umi', value: umi },
+            },
+          };
+        }
+        const payload = { ...components, version };
         return window.BFPJS.publish(payload);
       })
       .catch((err) => window?.lana?.log(`Browser Fingerprint load failed: ${err}`));
