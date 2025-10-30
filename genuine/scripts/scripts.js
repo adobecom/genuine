@@ -160,7 +160,7 @@ const CONFIG = {
     onDemand: false,
   },
   bfp: {
-    stageURL: 'https://d1hmet3ucsy3j0.cloudfront.net/bfp-stg/v1/bfp.js',
+    stageURL: 'https://d2d0g3srbng7g9.cloudfront.net/bfp-stg/v1/bfp.js',
     prodURL: 'https://d1hmet3ucsy3j0.cloudfront.net/bfp/v1/bfp.js',
     apiKey: 'genuine-bfp-milo',
   },
