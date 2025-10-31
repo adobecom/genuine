@@ -45,7 +45,7 @@ export async function isTokenValid() {
   }
 }
 
-export async function loadBFP() {
+export async function loadBFP(umi) {
   try {
     const { loadScript } = await import(`${miloLibs}/utils/utils.js`);
     const {
@@ -67,16 +67,13 @@ export async function loadBFP() {
       })
       .then((fp) => fp.get())
       .then(({ components, version }) => {
-        const umi = new URLSearchParams(window.location.search).get('umi');
-        if (umi) {
-          components.metaData = {
-            ...components.metaData,
-            meta: {
-              ...components.metaData?.meta,
-              deviceId: { type: 'umi', value: umi },
-            },
-          };
-        }
+        components.metaData = {
+          ...components.metaData,
+          meta: {
+            ...components.metaData?.meta,
+            deviceId: { type: 'umi', value: umi },
+          },
+        };
         const payload = { ...components, version };
         return window.BFPJS.publish(payload);
       })

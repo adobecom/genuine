@@ -183,7 +183,8 @@ async function loadGenuinePage() {
   loadLana({ clientId: 'genuine' });
   await loadArea();
   decorateButton();
-  loadBFP();
+  const umi = new URLSearchParams(window.location.search).get('umi');
+  if (umi) loadBFP(umi);
 }
 
 (function loadStyles() {
