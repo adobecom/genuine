@@ -1,6 +1,17 @@
-import { getLibs } from './utils.js';
+import { getLibs, getConfig } from './utils.js';
 
 const miloLibs = getLibs('/libs');
+
+const setApiKeyHeader = (opts, serviceName, envName) => {
+  const keys = {
+    gc: { stage: 'TargetingServiceInternal', prod: 'TargetingServiceInternal' },
+    ic: { stage: 'ic-non-prod', prod: 'ic-prod' },
+  };
+
+  if (keys[serviceName] && keys[serviceName][envName]) {
+    opts.headers['x-api-key'] = keys[serviceName][envName];
+  }
+};
 
 export async function isTokenValid() {
   const { default: getServiceConfig } = await import(
@@ -10,7 +21,9 @@ export async function isTokenValid() {
   const gtoken = urlParams.get('gtoken');
   const gid = urlParams.get('gid');
   const serviceName = urlParams.get('serviceName') || 'genuine';
-  const serviceConf = await getServiceConfig(window.location.origin);
+  const envName = urlParams.get('env');
+  const { codeRoot } = getConfig();
+  const serviceConf = await getServiceConfig(codeRoot);
 
   const formBody = Object.entries({ gid, gtoken })
     .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
@@ -23,6 +36,8 @@ export async function isTokenValid() {
       method: 'POST',
     };
 
+    setApiKeyHeader(opts, serviceName, envName);
+
     const response = await fetch(serviceConf[serviceName].url, opts);
     return response.ok;
   } catch (err) {
@@ -32,7 +47,7 @@ export async function isTokenValid() {
 
 export async function loadBFP() {
   try {
-    const { getConfig, loadScript } = await import(`${miloLibs}/utils/utils.js`);
+    const { loadScript } = await import(`${miloLibs}/utils/utils.js`);
     const {
       prodDomains,
       bfp: { apiKey, prodURL, stageURL },

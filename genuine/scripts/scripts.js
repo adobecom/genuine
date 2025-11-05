@@ -128,7 +128,7 @@ const locales = {
 
 // Add any config options.
 const CONFIG = {
-  contentRoot: '/genuine-content',
+  contentRoot: '/genuine-shared',
   codeRoot: '/genuine',
   imsClientId: 'adobedotcom-cc',
   locales,
@@ -201,7 +201,7 @@ async function loadGenuinePage() {
 
 (async function loadPage() {
   const validate = document.head.querySelector('meta[name="validate"]');
-  if (validate?.content === 'on') {
+  if (validate?.content === 'on' && !window.location.hostname.includes('aem.page')) {
     if ((await isTokenValid(miloLibs)) || noRedirect) {
       loadGenuinePage();
       return;

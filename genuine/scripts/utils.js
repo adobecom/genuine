@@ -19,7 +19,7 @@
 /**
  * Genuine pages param keys
  */
-export const GOCART_PARAM_KEYS = ['gid', 'gtoken', 'sdid', 'cohortid', 'timer', 'gcsrc', 'gcprog', 'gcprogcat', 'gcpagetype', 'language', 'productname', 'daysremaining'];
+export const GOCART_PARAM_KEYS = ['gid', 'gtoken', 'sdid', 'cohortid', 'timer', 'gcsrc', 'gcprog', 'gcprogcat', 'gcpagetype', 'language', 'productname', 'daysremaining', 'serviceName', 'notifauditid'];
 
 /**
  * The decision engine for where to get Milo's libs from.
@@ -59,8 +59,7 @@ export const [setLibs, getLibs] = (() => {
 
 const miloLibs = setLibs('/libs');
 
-const { createTag, localizeLink } = await import(`${miloLibs}/utils/utils.js`);
-export { createTag, localizeLink };
+export const { createTag, localizeLink, getConfig } = await import(`${miloLibs}/utils/utils.js`);
 
 function getCountdown(timer) {
   const timerDate = new Date(timer);

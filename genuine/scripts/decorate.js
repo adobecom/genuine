@@ -2,7 +2,7 @@ import { getUrlParams } from './utils.js';
 
 function goCartLinkAppend(link, paramsValue) {
   try {
-    const url = new URL(link.getAttribute('href'));
+    const url = new URL(link.getAttribute('href'), window.location.origin);
     const urlSearchParams = new URLSearchParams(url.search);
 
     Object.keys(paramsValue).forEach((key) => {
@@ -19,9 +19,12 @@ function goCartLinkAppend(link, paramsValue) {
 }
 
 export function decorateButton() {
-  const buttons = document.querySelectorAll('a.con-button');
+  const links = document.querySelector('main').querySelectorAll('a:not([href^="tel:"])');
+  const cache = document.head.querySelector('meta[name="cache"]');
   const paramsValue = getUrlParams();
-  buttons.forEach((button) => goCartLinkAppend(button, paramsValue));
+  if (cache?.content === 'on' && Object.keys(paramsValue).length > 0) {
+    links.forEach((link) => goCartLinkAppend(link, paramsValue));
+  }
 }
 
 export default {};
