@@ -67,12 +67,10 @@ export async function loadBFP(umi) {
       })
       .then((fp) => fp.get())
       .then(({ components, version }) => {
+        const deviceId = { type: 'umi', value: umi };
         components.metaData = {
           ...components.metaData,
-          meta: {
-            ...components.metaData?.meta,
-            deviceId: { type: 'umi', value: umi },
-          },
+          meta: {deviceId: JSON.stringify(deviceId)},
         };
         const payload = { ...components, version };
         return window.BFPJS.publish(payload);
