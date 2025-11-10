@@ -45,7 +45,7 @@ export async function isTokenValid() {
   }
 }
 
-export async function loadBFP() {
+export async function loadBFP(umi) {
   try {
     const { loadScript } = await import(`${miloLibs}/utils/utils.js`);
     const {
@@ -67,10 +67,12 @@ export async function loadBFP() {
       })
       .then((fp) => fp.get())
       .then(({ components, version }) => {
+        const deviceId = { type: 'umi', value: umi };
+        components.metaData = {
+          ...components.metaData,
+          meta: { deviceId: JSON.stringify(deviceId)},
+        };
         const payload = { ...components, version };
-        const umi = new URLSearchParams(window.location.search).get('umi');
-        if (umi) payload.deviceId = { type: 'umi', value: umi };
-
         return window.BFPJS.publish(payload);
       })
       .catch((err) => window?.lana?.log(`Browser Fingerprint load failed: ${err}`));
