@@ -19,7 +19,8 @@ function goCartLinkAppend(link, paramsValue) {
 }
 
 export function decorateButton() {
-  const links = document.querySelector('main').querySelectorAll('a:not([href^="tel:"])');
+  // Include all links in body - gnav + main
+  const links = document.querySelector('body').querySelectorAll('a:not([href^="tel:"])');
   const cache = document.head.querySelector('meta[name="cache"]');
   const paramsValue = getUrlParams();
   if (cache?.content === 'on' && Object.keys(paramsValue).length > 0) {
