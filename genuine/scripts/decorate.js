@@ -20,7 +20,7 @@ function goCartLinkAppend(link, paramsValue) {
 
 export function decorateButton() {
   // Include links in header-localnav and main
-  const links = document.querySelectorAll('header.localnav a:not([href^="tel:"]), main a:not([href^="tel:"])');
+  const links = document.querySelectorAll('header.local-nav a:not([href^="tel:"]), main a:not([href^="tel:"])');
   const cache = document.head.querySelector('meta[name="cache"]');
   const paramsValue = getUrlParams();
   if (cache?.content === 'on' && Object.keys(paramsValue).length > 0) {
