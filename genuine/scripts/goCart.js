@@ -20,7 +20,7 @@ export async function isTokenValid() {
   const urlParams = new URLSearchParams(window.location.search);
   const gtoken = urlParams.get('gtoken');
   const gid = urlParams.get('gid');
-  const serviceName = urlParams.get('serviceName') || 'genuine';
+  const serviceName = urlParams.get('serviceName') || 'gc';
   const envName = urlParams.get('env');
   const { codeRoot } = getConfig();
   const serviceConf = await getServiceConfig(codeRoot);
@@ -70,7 +70,7 @@ export async function loadBFP(umi) {
         const deviceId = { type: 'umi', value: umi };
         components.metaData = {
           ...components.metaData,
-          meta: { deviceId: JSON.stringify(deviceId)},
+          meta: { deviceId: JSON.stringify(deviceId) },
         };
         const payload = { ...components, version };
         return window.BFPJS.publish(payload);
