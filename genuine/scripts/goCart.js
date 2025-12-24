@@ -17,12 +17,12 @@ export async function isTokenValid() {
   const { default: getServiceConfig } = await import(
     `${miloLibs}/utils/service-config.js`
   );
+  const { codeRoot, env } = getConfig();
   const urlParams = new URLSearchParams(window.location.search);
   const gtoken = urlParams.get('gtoken');
   const gid = urlParams.get('gid');
   const serviceName = urlParams.get('serviceName') || 'gc';
-  const envName = urlParams.get('env');
-  const { codeRoot } = getConfig();
+  const envName = urlParams.get('env') || env.name || 'prod'; // Priority: Query Param -> Milo Env -> Prod
   const serviceConf = await getServiceConfig(codeRoot);
 
   const formBody = Object.entries({ gid, gtoken })
