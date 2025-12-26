@@ -1,0 +1,60 @@
+
+.ribbon {
+    --ribbon-height: 64px;
+    --ribbon-padding-x: 20px;
+    --logo-width: 66px;
+
+    display: flex;
+    align-items: center;
+    padding: 0 var(--ribbon-padding-x);
+    height: var(--ribbon-height);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.ribbon .ribbon__logo {
+    width: var(--logo-width);
+    display: flex;
+    align-items: center;
+}
+
+.ribbon .ribbon__logo-link {
+    width: inherit;
+    display: flex;
+    align-items: center;
+}
+
+.ribbon .ribbon__logo img {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+}
+
+.ribbon .ribbon__title {
+    display: flex;
+    justify-content: center;
+    width: calc(100% - (var(--logo-width) * 2));
+}
+
+/*Updating close button styling of modal if ribbon(genuine block) is used within modal */
+.dialog-modal:has(.ribbon) .dialog-close {
+    --close-icon-size: 16px;
+    --close-cta-size: 20px;
+    width: var(--close-cta-size);
+    height: var(--close-cta-size);
+    border-radius: 50%;
+    border: 2px solid #292929;
+    right: 20px;
+    /* used height of the ribbon */
+    top: calc((64px - var(--close-cta-size)) / 2); 
+    svg {
+        width: var(--close-icon-size);
+        height: var(--close-icon-size);
+    }
+    line {
+        stroke: #292929;
+    }
+    circle {
+        fill: var(--color-white);
+    }
+}
