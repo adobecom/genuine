@@ -1,0 +1,41 @@
+:root {
+    --ribbon-height: 48px;
+    --ribbon-padding-x: 20px;
+    --logo-width: 66px;
+    --close-button-width: 20px;
+}
+
+.ribbon-container {
+    display: flex;
+    align-items: center;
+    padding: 0 var(--ribbon-padding-x);
+    height: var(--ribbon-height);
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: space-between;
+}
+
+.ribbon-container picture,
+.ribbon-logo {
+    display: flex;
+}
+
+.ribbon-logo img {
+    width: var(--logo-width);
+}
+
+.ribbon-close img {
+    width: var(--close-button-width);
+}
+
+.ribbon-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ribbon-close {
+    display: flex;
+    justify-content: end;
+}
