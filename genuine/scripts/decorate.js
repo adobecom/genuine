@@ -26,6 +26,15 @@ export function decorateButton() {
   if (cache?.content === 'on' && Object.keys(paramsValue).length > 0) {
     links.forEach((link) => goCartLinkAppend(link, paramsValue));
   }
+
+  const observer = new MutationObserver((_, obs) => {
+    const localNav = document.querySelector('header.local-nav');
+    if (!localNav) return;
+    document.querySelectorAll('header.local-nav a:not([href^="tel:"])').forEach((link) => goCartLinkAppend(link, paramsValue));
+    obs.disconnect();
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
 }
 
 export default {};
