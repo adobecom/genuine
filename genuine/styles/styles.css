@@ -6,6 +6,9 @@
  * 
  *
  */
+ :root {
+  --link-disabled-color: #6e6e6e;
+ }
 
  .reading-width {
   max-width: 600px;
@@ -22,4 +25,17 @@
  .reading-width-footer-tag > .content {
   max-width: var(--grid-container-width);
   margin: 0 auto;
+}
+
+.link-disabled {
+  cursor: not-allowed;
+  color: var(--link-disabled-color) !important;
+  text-decoration: none !important;
+  pointer-events: none;
+}
+
+.link-disabled:hover,
+.link-disabled:focus {
+  text-decoration: none !important;
+  color: var(--link-disabled-color) !important;
 }
