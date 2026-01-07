@@ -29,7 +29,7 @@ export function decorateButton() {
 
   const observer = new MutationObserver((_, obs) => {
     const localNav = document.querySelector('header.local-nav');
-    if (!localNav) return;  
+    if (!localNav) return;
     document.querySelectorAll('header.local-nav a:not([href^="tel:"])').forEach((link) => goCartLinkAppend(link, paramsValue));
     obs.disconnect();
   });
