@@ -14,7 +14,7 @@ import { setLibs, getUrlParams } from './utils.js';
 
 import { isTokenValid, loadBFP } from './goCart.js';
 
-import { decorateButton } from './decorate.js';
+import { decorateLinks } from './decorate.js';
 
 const STYLES = '/genuine/styles/styles.css';
 
@@ -182,7 +182,7 @@ setConfig({ ...CONFIG, miloLibs });
 async function loadGenuinePage() {
   loadLana({ clientId: 'genuine' });
   await loadArea();
-  decorateButton();
+  decorateLinks();
   const umi = new URLSearchParams(window.location.search).get('umi');
   if (umi) loadBFP(umi);
 }
