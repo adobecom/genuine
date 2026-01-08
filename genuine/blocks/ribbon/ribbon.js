@@ -1,5 +1,13 @@
 import { createTag } from '../../scripts/utils.js';
 
+// ===== CONFIGURATION =====
+
+const CONFIG = {
+  DEFAULT_SPACING: 'xxxs-spacing',
+  DEFAULT_LOGO_ICON: 'lg-logo-icon',
+  DEFAULT_CLOSE_ICON: 'xxs-close-icon',
+};
+
 const LANA_OPTIONS = { tags: 'ribbon', errorType: 'i' };
 
 // ===== UTILITY FUNCTIONS =====
@@ -7,6 +15,23 @@ const LANA_OPTIONS = { tags: 'ribbon', errorType: 'i' };
 function logError(message, error) {
   window.lana?.log(`${message}: ${error}`, LANA_OPTIONS);
 }
+
+// ===== PARAMS PARSING FUNCTIONS =====
+
+function getBlockClasses(block) {
+  const classList = Array.from(block.classList);
+  const spacingClass = classList.find((cls) => cls.endsWith('-spacing')) || CONFIG.DEFAULT_SPACING;
+  const logoIconClass = classList.find((cls) => cls.endsWith('-logo-icon')) || CONFIG.DEFAULT_LOGO_ICON;
+  const closeIconClass = classList.find((cls) => cls.endsWith('-close-icon')) || CONFIG.DEFAULT_CLOSE_ICON;
+
+  return {
+    spacing: spacingClass,
+    logoIcon: logoIconClass,
+    closeIcon: closeIconClass,
+  };
+}
+
+// ===== DOM BUILDING FUNCTIONS =====
 
 function createRibbonContainer() {
   const container = createTag('div', { class: 'ribbon-container' });
@@ -63,6 +88,8 @@ function processCloseSection(closeSection, closeWrapper) {
   }
 }
 
+// ===== MAIN FUNCTION =====
+
 export default function decorate(block) {
   if (!block) return;
 
@@ -73,6 +100,12 @@ export default function decorate(block) {
     const closeSection = sections[2]; // Close button
 
     const { container, logoWrapper, contentWrapper, closeWrapper } = createRibbonContainer();
+
+    // Apply size classes for spacing, logo-icon and close-icon
+    const classes = getBlockClasses(block);
+    container.classList.add(classes.spacing);
+    logoWrapper.classList.add(classes.logoIcon);
+    closeWrapper.classList.add(classes.closeIcon);
 
     // Processing each section
     processLogoSection(logoSection, logoWrapper);
