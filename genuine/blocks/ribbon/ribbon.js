@@ -3,8 +3,8 @@ import { createTag } from '../../scripts/utils.js';
 // ===== CONFIGURATION =====
 
 const CONFIG = {
-  DEFAULT_SPACING: 'xxxs-spacing',
-  DEFAULT_LOGO_ICON: 'lg-logo-icon',
+  DEFAULT_SPACING: 'xxs-spacing',
+  DEFAULT_LOGO_ICON: 'l-logo-icon',
   DEFAULT_CLOSE_ICON: 'xxs-close-icon',
 };
 
