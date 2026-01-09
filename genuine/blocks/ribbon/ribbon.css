@@ -4,12 +4,11 @@
     --ribbon-padding-x: 20px;
 
     /* Spacing tokens for vertical padding */
-    --spacing-xxxs: 8px;
-    --spacing-xxs: 16px;
-    --spacing-xs: 24px;
-    --spacing-sm: 32px;
-    --spacing-md: 40px;
-    --spacing-lg: 56px;
+    --spacing-xxs: 8px;
+    --spacing-xs: 16px;
+    --spacing-s: 24px;
+    --spacing-m: 32px;
+    --spacing-l: 40px;
     --spacing-xl: 48px;
     --spacing-xxl: 56px;
     --spacing-xxxl: 80px;
@@ -17,9 +16,9 @@
     /* Logo and close icon size tokens */
     --icon-xxs: 16px;
     --icon-xs: 24px;
-    --icon-sm: 32px;
-    --icon-md: 40px;
-    --icon-lg: 56px;
+    --icon-s: 32px;
+    --icon-m: 40px;
+    --icon-l: 56px;
     --icon-xl: 64px;
     --icon-xxl: 80px;
 }
@@ -28,7 +27,7 @@
     display: flex;
     align-items: center;
     padding-inline: var(--ribbon-padding-x); /* Horizontal padding */
-    padding-block: var(--spacing-xxxs); /* Default vertical spacing */
+    padding-block: var(--spacing-xxs); /* Default vertical spacing */
     width: 100%;
     box-sizing: border-box;
     justify-content: space-between;
@@ -40,7 +39,7 @@
 }
 
 .ribbon-logo img {
-    width: var(--icon-lg); /* Default logo icon size */
+    width: var(--icon-l); /* Default logo icon size */
 }
 
 .ribbon-close img {
@@ -60,12 +59,11 @@
 }
 
 /* Spacing classes for vertical padding */
-.ribbon-container.xxxs-spacing { padding-block: var(--spacing-xxxs); }
 .ribbon-container.xxs-spacing { padding-block: var(--spacing-xxs); }
 .ribbon-container.xs-spacing { padding-block: var(--spacing-xs); }
-.ribbon-container.sm-spacing { padding-block: var(--spacing-sm); }
-.ribbon-container.md-spacing { padding-block: var(--spacing-md); }
-.ribbon-container.lg-spacing { padding-block: var(--spacing-lg); }
+.ribbon-container.s-spacing { padding-block: var(--spacing-s); }
+.ribbon-container.m-spacing { padding-block: var(--spacing-m); }
+.ribbon-container.l-spacing { padding-block: var(--spacing-l); }
 .ribbon-container.xl-spacing { padding-block: var(--spacing-xl); }
 .ribbon-container.xxl-spacing { padding-block: var(--spacing-xxl); }
 .ribbon-container.xxxl-spacing { padding-block: var(--spacing-xxxl); }
@@ -73,18 +71,18 @@
 /* Logo icon size classes */
 .ribbon-logo.xxs-logo-icon img { width: var(--icon-xxs); }
 .ribbon-logo.xs-logo-icon img { width: var(--icon-xs); }
-.ribbon-logo.sm-logo-icon img { width: var(--icon-sm); }
-.ribbon-logo.md-logo-icon img { width: var(--icon-md); }
-.ribbon-logo.lg-logo-icon img { width: var(--icon-lg); }
+.ribbon-logo.s-logo-icon img { width: var(--icon-s); }
+.ribbon-logo.m-logo-icon img { width: var(--icon-m); }
+.ribbon-logo.l-logo-icon img { width: var(--icon-l); }
 .ribbon-logo.xl-logo-icon img { width: var(--icon-xl); }
 .ribbon-logo.xxl-logo-icon img { width: var(--icon-xxl); }
 
 /* Close icon size classes */
 .ribbon-close.xxs-close-icon img { width: var(--icon-xxs); }
 .ribbon-close.xs-close-icon img { width: var(--icon-xs); }
-.ribbon-close.sm-close-icon img { width: var(--icon-sm); }
-.ribbon-close.md-close-icon img { width: var(--icon-md); }
-.ribbon-close.lg-close-icon img { width: var(--icon-lg); }
+.ribbon-close.s-close-icon img { width: var(--icon-s); }
+.ribbon-close.m-close-icon img { width: var(--icon-m); }
+.ribbon-close.l-close-icon img { width: var(--icon-l); }
 .ribbon-close.xl-close-icon img { width: var(--icon-xl); }
 .ribbon-close.xxl-close-icon img { width: var(--icon-xxl); }
 
