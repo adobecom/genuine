@@ -91,7 +91,6 @@ function processCloseSection(closeSection, closeWrapper) {
 // ===== MAIN FUNCTION =====
 
 export default function decorate(block) {
-  debugger
   if (!block) return;
 
   try {
