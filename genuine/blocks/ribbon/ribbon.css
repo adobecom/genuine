@@ -1,15 +1,33 @@
+/* Responsive styling with mobile/tablet-first approach */
+
 :root {
-    --ribbon-height: 48px;
     --ribbon-padding-x: 20px;
-    --logo-width: 66px;
-    --close-button-width: 20px;
+
+    /* Spacing tokens for vertical padding */
+    --spacing-xxs: 8px;
+    --spacing-xs: 16px;
+    --spacing-s: 24px;
+    --spacing-m: 32px;
+    --spacing-l: 40px;
+    --spacing-xl: 48px;
+    --spacing-xxl: 56px;
+    --spacing-xxxl: 80px;
+
+    /* Logo and close icon size tokens */
+    --icon-xxs: 16px;
+    --icon-xs: 24px;
+    --icon-s: 32px;
+    --icon-m: 40px;
+    --icon-l: 56px;
+    --icon-xl: 64px;
+    --icon-xxl: 80px;
 }
 
 .ribbon-container {
     display: flex;
     align-items: center;
-    padding: 0 var(--ribbon-padding-x);
-    height: var(--ribbon-height);
+    padding-inline: var(--ribbon-padding-x); /* Horizontal padding */
+    padding-block: var(--spacing-xxs); /* Default vertical spacing */
     width: 100%;
     box-sizing: border-box;
     justify-content: space-between;
@@ -21,11 +39,11 @@
 }
 
 .ribbon-logo img {
-    width: var(--logo-width);
+    width: var(--icon-l); /* Default logo icon size */
 }
 
 .ribbon-close img {
-    width: var(--close-button-width);
+    width: var(--icon-xxs); /* Default close icon size */
 }
 
 .ribbon-content {
@@ -37,5 +55,42 @@
 
 .ribbon-close {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
+}
+
+/* Spacing classes for vertical padding */
+.ribbon-container.xxs-spacing { padding-block: var(--spacing-xxs); }
+.ribbon-container.xs-spacing { padding-block: var(--spacing-xs); }
+.ribbon-container.s-spacing { padding-block: var(--spacing-s); }
+.ribbon-container.m-spacing { padding-block: var(--spacing-m); }
+.ribbon-container.l-spacing { padding-block: var(--spacing-l); }
+.ribbon-container.xl-spacing { padding-block: var(--spacing-xl); }
+.ribbon-container.xxl-spacing { padding-block: var(--spacing-xxl); }
+.ribbon-container.xxxl-spacing { padding-block: var(--spacing-xxxl); }
+
+/* Logo icon size classes */
+.ribbon-logo.xxs-logo-icon img { width: var(--icon-xxs); }
+.ribbon-logo.xs-logo-icon img { width: var(--icon-xs); }
+.ribbon-logo.s-logo-icon img { width: var(--icon-s); }
+.ribbon-logo.m-logo-icon img { width: var(--icon-m); }
+.ribbon-logo.l-logo-icon img { width: var(--icon-l); }
+.ribbon-logo.xl-logo-icon img { width: var(--icon-xl); }
+.ribbon-logo.xxl-logo-icon img { width: var(--icon-xxl); }
+
+/* Close icon size classes */
+.ribbon-close.xxs-close-icon img { width: var(--icon-xxs); }
+.ribbon-close.xs-close-icon img { width: var(--icon-xs); }
+.ribbon-close.s-close-icon img { width: var(--icon-s); }
+.ribbon-close.m-close-icon img { width: var(--icon-m); }
+.ribbon-close.l-close-icon img { width: var(--icon-l); }
+.ribbon-close.xl-close-icon img { width: var(--icon-xl); }
+.ribbon-close.xxl-close-icon img { width: var(--icon-xxl); }
+
+/* Desktop styles */
+@media screen and (min-width: 900px) {
+    :root {
+        --spacing-xl: 56px;
+        --spacing-xxl: 80px;
+        --spacing-xxxl: 104px;
+    }
 }
