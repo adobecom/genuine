@@ -28,7 +28,7 @@ export async function isTokenValid() {
   const endptURL = '/genuine-shared/endpoints.json';
   const res = await fetch(endptURL);
   const response = await res.json();
-  const {data} = response;
+  const { data } = response;
 
   const formBody = Object.entries({ gid, gtoken })
     .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
@@ -44,8 +44,8 @@ export async function isTokenValid() {
     setApiKeyHeader(opts, serviceName, envName);
 
     const url = getServiceURL(data, serviceName, envName);
-    const response = await fetch(url, opts);
-    return response.ok;
+    const responseUrl = await fetch(url, opts);
+    return responseUrl.ok;
   } catch (err) {
     return false;
   }
