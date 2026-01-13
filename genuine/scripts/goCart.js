@@ -8,9 +8,6 @@ function getServiceURL(data, serviceName, envName) {
   const urlValue = data.find((item) => item.key === keyToFind);
   return urlValue ? urlValue.value : null;
 }
-
-
-
 const setApiKeyHeader = (opts, serviceName, envName) => {
   const keys = {
     gc: { stage: 'TargetingServiceInternal', prod: 'TargetingServiceInternal' },
