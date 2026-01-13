@@ -184,7 +184,8 @@ async function loadGenuinePage() {
   await loadArea();
   decorateLinks();
   const umi = new URLSearchParams(window.location.search).get('umi');
-  if (umi) loadBFP(umi);
+  const bfpCheck = document.head.querySelector('meta[name="browser-fingerprint"]')?.content === 'on';
+  if (bfpCheck && umi) loadBFP(umi);
 }
 
 (function loadStyles() {
