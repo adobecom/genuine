@@ -5,7 +5,7 @@ const miloLibs = getLibs('/libs');
 function getServiceURL(data, serviceName, envName) {
   if (!data || !serviceName || !envName) return null;
   const keyToFind = `${envName}.${serviceName}.url`;
-  const urlValue = data.find(item => item.key === keyToFind);
+  const urlValue = data.find((item) => item.key === keyToFind);
   return urlValue ? urlValue.value : null;
 }
 
