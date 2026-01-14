@@ -62,8 +62,8 @@ export async function loadBFP(umi) {
     const loadBFPScript = () => loadScript(scriptURL, undefined, { mode: 'defer' })
       .then(() => {
         if (!window.BFPJS) throw new Error('Cannot load BFPJS script');
-
-        return window.BFPJS.load({ debug: !isProd, xApiKey: apiKey, env });
+        else if (!umi) return;
+        return window.BFPJS.load({ debug: !isProd, xApiKey: apiKey, env }); // add umi null check for this
       })
       .then((fp) => fp.get())
       .then(({ components, version }) => {
