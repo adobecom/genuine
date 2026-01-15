@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import { setLibs, getUrlParams } from './utils.js';
+import { setLibs, getUrlParams, decorateArea } from './utils.js';
 
 import { isTokenValid, loadBFP } from './goCart.js';
 
@@ -199,6 +199,8 @@ async function loadGenuinePage() {
     document.head.appendChild(link);
   });
 }());
+
+decorateArea();
 
 (async function loadPage() {
   const validate = document.head.querySelector('meta[name="validate"]');
