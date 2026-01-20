@@ -64,7 +64,7 @@ export async function loadBFP() {
       .then(() => {
         if (!window.BFPJS) throw new Error('Cannot load BFPJS script');
         if (!umi) {
-          window?.lana?.logWarn('Skipping BFPJS load because UMI is missing');
+          window?.lana?.warn('Skipping BFPJS load because UMI is missing');
           return Promise.resolve();
         }
         return window.BFPJS.load({ debug: !isProd, xApiKey: apiKey, env });
