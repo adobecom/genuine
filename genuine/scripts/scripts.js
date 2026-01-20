@@ -183,8 +183,9 @@ async function loadGenuinePage() {
   loadLana({ clientId: 'genuine' });
   await loadArea();
   decorateLinks();
-  const umi = new URLSearchParams(window.location.search).get('umi');
-  if (umi) loadBFP(umi);
+  // Load BFP if 'browser-fingerprint' meta tag is enabled
+  const isBfpEnabled = document.head.querySelector('meta[name="browser-fingerprint"]')?.content === 'on';
+  if (isBfpEnabled) loadBFP();
 }
 
 (function loadStyles() {
