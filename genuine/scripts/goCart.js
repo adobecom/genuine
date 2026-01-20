@@ -45,7 +45,7 @@ export async function isTokenValid() {
   }
 }
 
-export async function loadBFP(umi) {
+export async function loadBFP() {
   try {
     const { loadScript } = await import(`${miloLibs}/utils/utils.js`);
     const {
@@ -58,7 +58,8 @@ export async function loadBFP(umi) {
 
     const isProd = env === 'prod';
     const scriptURL = isProd ? prodURL : stageURL;
-
+    const umi = new URLSearchParams(window.location.search).get('umi');
+    // trigger the BFP load only if umi is present
     const loadBFPScript = () => loadScript(scriptURL, undefined, { mode: 'defer' })
       .then(() => {
         if (!window.BFPJS) throw new Error('Cannot load BFPJS script');
