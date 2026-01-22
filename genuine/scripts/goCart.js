@@ -2,6 +2,12 @@ import { getLibs, getConfig } from './utils.js';
 
 const miloLibs = getLibs('/libs');
 
+function getServiceURL(data, serviceName, envName) {
+  if (!data || !serviceName || !envName) return null;
+  const keyToFind = `${envName}.${serviceName}.url`;
+  const urlValue = data.find((item) => item.key === keyToFind);
+  return urlValue ? urlValue.value : null;
+}
 const setApiKeyHeader = (opts, serviceName, envName) => {
   const keys = {
     gc: { stage: 'TargetingServiceInternal', prod: 'TargetingServiceInternal' },
@@ -14,16 +20,15 @@ const setApiKeyHeader = (opts, serviceName, envName) => {
 };
 
 export async function isTokenValid() {
-  const { default: getServiceConfig } = await import(
-    `${miloLibs}/utils/service-config.js`
-  );
-  const { codeRoot, env } = getConfig();
   const urlParams = new URLSearchParams(window.location.search);
   const gtoken = urlParams.get('gtoken');
   const gid = urlParams.get('gid');
   const serviceName = urlParams.get('serviceName') || 'gc';
-  const envName = urlParams.get('env') || env.name || 'prod'; // Priority: Query Param -> Milo Env -> Prod
-  const serviceConf = await getServiceConfig(codeRoot);
+  const envName = urlParams.get('env') || getConfig().env.name || 'prod'; // Priority: Query Param -> Milo Env -> Prod
+  const endptURL = '/genuine-shared/endpoints.json';
+  const res = await fetch(endptURL);
+  const response = await res.json();
+  const { data } = response;
 
   const formBody = Object.entries({ gid, gtoken })
     .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
@@ -38,8 +43,9 @@ export async function isTokenValid() {
 
     setApiKeyHeader(opts, serviceName, envName);
 
-    const response = await fetch(serviceConf[serviceName].url, opts);
-    return response.ok;
+    const url = getServiceURL(data, serviceName, envName);
+    const responseUrl = await fetch(url, opts);
+    return responseUrl.ok;
   } catch (err) {
     return false;
   }
