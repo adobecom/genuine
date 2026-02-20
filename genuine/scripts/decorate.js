@@ -43,7 +43,9 @@ function goCartLinkAppend(link, paramsValue) {
 
 export function decorateLinks() {
   // Include links in header-localnav and main
-  const links = document.querySelectorAll('header.local-nav a:not([href^="tel:"]), main a:not([href^="tel:"])');
+  const localNavSelector = 'header.local-nav';
+  const localNavLinksSelector = `${localNavSelector} .feds-navItem:not(.feds-navItem--megaMenu) a:not([href^="tel:"])`;
+  const links = document.querySelectorAll(`${localNavLinksSelector}, main a:not([href^="tel:"])`);
   const cache = document.head.querySelector('meta[name="cache"]');
   const paramsValue = getUrlParams();
   const shouldAppendParams = cache?.content === 'on' && Object.keys(paramsValue).length > 0;
@@ -55,9 +57,9 @@ export function decorateLinks() {
   });
 
   const observer = new MutationObserver((_, obs) => {
-    const localNav = document.querySelector('header.local-nav');
+    const localNav = document.querySelector(localNavSelector);
     if (!localNav) return;
-    document.querySelectorAll('header.local-nav a:not([href^="tel:"])').forEach((link) => {
+    document.querySelectorAll(`${localNavLinksSelector}`).forEach((link) => {
       if (!processDisabledLink(link) && shouldAppendParams) {
         goCartLinkAppend(link, paramsValue);
       }
