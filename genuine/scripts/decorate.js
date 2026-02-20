@@ -20,7 +20,12 @@ function processDisabledLink(link) {
 
 function goCartLinkAppend(link, paramsValue) {
   try {
-    const url = new URL(link.getAttribute('href'), window.location.origin);
+    const href = link?.getAttribute('href');
+    if (!href) return;
+
+    const url = new URL(href, window.location.origin);
+    if (!url.protocol.startsWith('http')) return;
+
     const urlSearchParams = new URLSearchParams(url.search);
 
     Object.keys(paramsValue).forEach((key) => {
