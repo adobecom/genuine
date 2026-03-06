@@ -1254,6 +1254,7 @@ indices:
 
   lingo-mapping-be_fr:
     exclude:
+      - '**/*.json'
       - '**/genuine-shared/**'
       - '**/cc-shared/**'
       - '**/drafts/**'
@@ -1267,6 +1268,7 @@ indices:
 
   lingo-mapping-ca_fr:
     exclude:
+      - '**/*.json'
       - '**/genuine-shared/**'
       - '**/cc-shared/**'
       - '**/drafts/**'
@@ -1280,6 +1282,7 @@ indices:
 
   lingo-mapping-ch_fr:
     exclude:
+      - '**/*.json'
       - '**/genuine-shared/**'
       - '**/cc-shared/**'
       - '**/drafts/**'
@@ -1293,6 +1296,7 @@ indices:
 
   lingo-mapping-lu_fr:
     exclude:
+      - '**/*.json'
       - '**/genuine-shared/**'
       - '**/cc-shared/**'
       - '**/drafts/**'
@@ -1306,6 +1310,7 @@ indices:
 
   lingo-mapping-fr:
     exclude:
+      - '**/*.json'
       - '**/genuine-shared/**'
       - '**/cc-shared/**'
       - '**/drafts/**'
