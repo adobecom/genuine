@@ -59,7 +59,7 @@ export const [setLibs, getLibs] = (() => {
 
 const miloLibs = setLibs('/libs');
 
-export const { createTag, localizeLink, getConfig } = await import(`${miloLibs}/utils/utils.js`);
+export const { createTag, getConfig } = await import(`${miloLibs}/utils/utils.js`);
 
 function getCountdown(timer) {
   const timerDate = new Date(timer);

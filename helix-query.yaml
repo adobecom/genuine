@@ -1251,3 +1251,68 @@ indices:
     include:
       - /cis_ru/cc-shared/fragments/merch/**/merch-card/**
     target: /cis_ru/cc-shared/assets/query-index-cards.xslx
+
+  lingo-mapping-be_fr:
+    exclude:
+      - '**/genuine-shared/**'
+      - '**/cc-shared/**'
+      - '**/drafts/**'
+    include:
+      - '**/gnav**'
+      - '**/footer**'
+      - '**/fragments/**'
+      - /genuine/**
+      - /products/**
+    target: /be_fr/genuine-shared/assets/lingo/query-index.xlsx
+
+  lingo-mapping-ca_fr:
+    exclude:
+      - '**/genuine-shared/**'
+      - '**/cc-shared/**'
+      - '**/drafts/**'
+    include:
+      - '**/gnav**'
+      - '**/footer**'
+      - '**/fragments/**'
+      - /genuine/**
+      - /products/**
+    target: /ca_fr/genuine-shared/assets/lingo/query-index.xlsx
+
+  lingo-mapping-ch_fr:
+    exclude:
+      - '**/genuine-shared/**'
+      - '**/cc-shared/**'
+      - '**/drafts/**'
+    include:
+      - '**/gnav**'
+      - '**/footer**'
+      - '**/fragments/**'
+      - /genuine/**
+      - /products/**
+    target: /ch_fr/genuine-shared/assets/lingo/query-index.xlsx
+
+  lingo-mapping-lu_fr:
+    exclude:
+      - '**/genuine-shared/**'
+      - '**/cc-shared/**'
+      - '**/drafts/**'
+    include:
+      - '**/gnav**'
+      - '**/footer**'
+      - '**/fragments/**'
+      - /genuine/**
+      - /products/**
+    target: /lu_fr/genuine-shared/assets/lingo/query-index.xlsx
+
+  lingo-mapping-fr:
+    exclude:
+      - '**/genuine-shared/**'
+      - '**/cc-shared/**'
+      - '**/drafts/**'
+    include:
+      - '**/gnav**'
+      - '**/footer**'
+      - '**/fragments/**'
+      - /genuine/**
+      - /products/**
+    target: /fr/genuine-shared/assets/lingo/query-index.xlsx
