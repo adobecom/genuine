@@ -160,9 +160,10 @@ const CONFIG = {
     onDemand: false,
   },
   bfp: {
-    stageURL: 'https://d2d0g3srbng7g9.cloudfront.net/bfp-stg/v1/bfp.js',
-    prodURL: 'https://d1hmet3ucsy3j0.cloudfront.net/bfp/v1/bfp.js',
+    stageURL: 'https://bfp-stage.adobe.com/bfp/v1/bfp.min.js',
+    prodURL: 'https://bfp.adobe.com/bfp/v1/bfp.min.js',
     apiKey: 'genuine-bfp-milo',
+    clientId: 'adobedotcom-cc',
   },
   uniqueSiteId: 'genuine',
   mepLingoCountryToRegion: {
