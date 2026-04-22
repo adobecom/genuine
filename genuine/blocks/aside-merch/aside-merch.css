@@ -700,6 +700,13 @@
   
   }
 
+  .aside-merch.split.one-third .split-image .modal-img-link,
+  .aside-merch.split.one-third .split-image img,
+  .aside-merch.split.one-third .split-image video {
+    width: 33.333vw;
+  
+  }
+
   .aside-merch.split.split-left .split-image img, .aside-merch.split.split-left .split-image video {
     right: 0;
     left: auto;
@@ -724,6 +731,13 @@
   
   }
 
+  .aside-merch.split.one-third.split.half .split-image img,
+  .aside-merch.split.one-third.split.half .split-image video {
+    width: 33.333vw;
+    max-width: none;
+  
+  }
+
   .aside-merch.split .foreground.container {
     flex-direction: row;
     justify-content: stretch;
@@ -745,6 +759,19 @@
     flex: 0 0 61%;
     display: block;
     padding: 0;
+  
+  }
+
+  /* split + one-third: media column ⅓ width, content ⅔ */
+  .aside-merch.split.one-third .foreground.container .text {
+    flex: 0 0 66.666%;
+    max-width: 66.666%;
+  
+  }
+
+  .aside-merch.split.one-third .foreground.container .image {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
   
   }
 
@@ -946,6 +973,17 @@
   
   }
 
+  .aside-merch.split.one-third .foreground.container .text {
+    flex: 0 0 66.666%;
+  
+  }
+
+  .aside-merch.split.one-third .foreground.container .image {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+  
+  }
+
   .aside-merch .split-image .modal-img-link, .aside-merch.split .split-image img, .aside-merch.split .split-image video {
     width: 60.5vw;
   
@@ -963,6 +1001,14 @@
 
   .aside-merch.split .desktop-standard img, .aside-merch.split .desktop-standard video {
     aspect-ratio: var(--aspect-ratio-standard);
+  
+  }
+
+  .aside-merch.split.one-third .split-image .modal-img-link,
+  .aside-merch.split.one-third .split-image img,
+  .aside-merch.split.one-third .split-image video {
+    width: 33.333vw;
+    max-width: 100%;
   
   }
 
@@ -1057,6 +1103,12 @@
 @media screen and (min-width: 1440px) {
   .aside-merch.split .foreground.container .text {
     flex: 0 0 calc(500px - 10.5vw);
+  
+  }
+
+  .aside-merch.split.one-third .foreground.container .text {
+    flex: 0 0 66.666%;
+    max-width: 66.666%;
   
   }
 }
