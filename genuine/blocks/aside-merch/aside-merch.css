@@ -50,7 +50,7 @@
   display: block;
 }
 
-.aside-merch.split picture {
+.aside-merch.split picture:not(merch-card *) {
   display: flex;
 }
 
@@ -181,27 +181,27 @@
   height: auto;
 }
 
-.aside-merch.split .icon-stack-area li img {
+.aside-merch.split .icon-stack-area li img:not(merch-card *) {
   width: var(--icon-size-m);
   height: auto;
 }
 
-.aside-merch.split .format picture,
-.aside-merch.split .format video {
+.aside-merch.split .format picture:not(merch-card *),
+.aside-merch.split .format video:not(merch-card *) {
   display: flex;
   height: 100%;
   align-items: center;
 }
 
-.aside-merch.split .icon-stack-area li picture {
+.aside-merch.split .icon-stack-area li picture:not(merch-card *) {
   flex-shrink: 0;
 }
 
-.aside-merch .foreground.container .icon-area picture {
+.aside-merch .foreground.container .icon-area picture:not(merch-card *) {
   height: 100%;
 }
 
-.aside-merch .foreground.container .icon-area img {
+.aside-merch .foreground.container .icon-area img:not(merch-card *) {
   max-height: 100%;
   width: auto;
   object-fit: cover;
@@ -245,16 +245,16 @@
   display: none;
 }
 
-.aside-merch.rounded-corners .foreground .image img,
+.aside-merch.rounded-corners .foreground .image img:not(merch-card *),
 .aside-merch.rounded-corners .foreground .image:not(:has(.video-container)) .pause-play-wrapper,
-.aside-merch.rounded-corners .foreground .image video,
+.aside-merch.rounded-corners .foreground .image video:not(merch-card *),
 .aside-merch.rounded-corners .foreground.container .image .milo-video iframe {
   border-radius: 16px;
 }
 
-.aside-merch .foreground.container .image video,
-.aside-merch .foreground.container .image picture,
-.aside-merch .foreground.container .image picture img {
+.aside-merch .foreground.container .image video:not(merch-card *),
+.aside-merch .foreground.container .image picture:not(merch-card *),
+.aside-merch .foreground.container .image picture img:not(merch-card *) {
   width: 100%;
   display: flex;
 }
@@ -331,10 +331,17 @@
   margin-top: 16px;
 }
 
+.aside-merch.one-third .foreground.container .text .two-merch-cards {
+  --merch-card-collection-card-width: 276px;
+  
+  padding-inline-start: 0;
+  justify-content: start;
+  gap: 24px;
+
+}
+
 .aside-merch .foreground.container .text merch-card {
   max-width: 276px;
-  
-  /* margin-inline-start: 4px; */
 }
 
 .aside-merch .foreground.container .text p[class^="body-"]:not(merch-card *) a:any-link {
@@ -391,16 +398,6 @@
   line-height: 150%;
   font-weight: 400;
   text-decoration: underline;
-}
-
-/* .aside-merch.half .foreground.container .text merch-card {
-  max-width: 276px;
-  margin-inline-start: 4px;
-} */
-
-.aside-merch.one-third .foreground.container .text merch-card {
-  /* max-width: 276px; */
-  margin-inline-start: -24px;
 }
 
 .aside-merch.split.half .foreground.container .text merch-card {
@@ -475,10 +472,6 @@
 
   .aside-merch.split .tablet-standard img, .aside-merch.split .tablet-standard video {
     aspect-ratio: var(--aspect-ratio-standard);
-  }
-
-  .aside-merch.split-right .split-image img, .aside-merch.split-right .split-image video {
-    inset-inline-start: 0;
   }
 
   .aside-merch.split.large {
@@ -598,7 +591,7 @@
     margin-bottom: var(--spacing-xs);
   }
 
-  .aside-merch.medium.split.bio .foreground.container .text .icon-area img, .aside-merch.large.split.bio .foreground.container .text .icon-area img {
+  .aside-merch.medium.split.bio .foreground.container .text .icon-area img:not(merch-card *), .aside-merch.large.split.bio .foreground.container .text .icon-area img:not(merch-card *) {
     width: var(--icon-size-xxl);
     height: var(--icon-size-xxl);
     border-radius: 50%;
