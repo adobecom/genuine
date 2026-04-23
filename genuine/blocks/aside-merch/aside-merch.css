@@ -582,6 +582,84 @@
 
 }
 
+.aside-merch .foreground.container .action-area a.icon-area.con-button,
+.aside-merch.split.bio .foreground.container .text .action-area a.icon-area.con-button {
+  display: inline-block;
+  height: unset;
+  margin-bottom: unset;
+
+}
+
+.aside-merch .foreground.container .text div[class~="body-s"] {
+  display: block;
+}
+
+.aside-merch .foreground.container .text p[class~="body-s"]:last-of-type {
+  margin-top: 16px;
+}
+
+.aside-merch .foreground.container .text p[class~="body-s"] a:any-link {
+  color: var(--color-white);
+}
+
+.aside-merch .foreground.container .text p[class~="body-s"] merch-card a:any-link {
+  color: revert-layer;
+}
+
+.aside-merch .foreground.container .text merch-card {
+  max-width: 276px;
+  margin-left: 4px;
+}
+
+.aside-merch .fragment .section {
+  gap: 16px
+}
+
+/* center variant + split: stack content vertically, text spans full width */
+.aside-merch.split.center .foreground.container {
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-xl) 0;
+}
+
+.aside-merch.split.center .foreground.container .text {
+  flex: 1 0 100%;
+  max-width: 600px;
+  margin: 0;
+}
+
+/* constrain heading and body paragraphs for readability; fragment divs stay full-width */
+.aside-merch.center .foreground.container .text > :is(h1, h2, h3, h4, h5, h6),
+.aside-merch.center .foreground.container .text > p {
+  max-width: 800px;
+  margin-inline: auto;
+}
+
+.aside-merch.center .foreground.container .text > :is(h1, h2, h3, h4, h5, h6) {
+  font-size: var(--type-heading-xl-size);
+  line-height: var(--type-heading-xl-lh, 125%);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+/* merch card sizing and gap for center variant */
+.aside-merch.center .foreground.container .text merch-card {
+  max-width: 304px;
+  width: 304px;
+}
+
+.aside-merch.center .two-merch-cards {
+  gap: 34px;
+}
+
+.aside-merch.center .foreground.container .text p[class^="body-"]:last-of-type a:any-link {
+  font-size: 16px;
+  line-height: 150%;
+  font-weight: 400;
+  text-decoration: underline;
+}
+
+
 @media screen and (min-width: 600px) {
   .aside-merch {
     --min-height-small: 420px;
@@ -1115,6 +1193,10 @@
     margin-top: 0;
   
   }
+
+  .aside-merch.center .two-merch-cards {
+    gap: 60px;
+  }
 }
 
 @media screen and (min-width: 1440px) {
@@ -1128,81 +1210,4 @@
     max-width: 66.666%;
   
   }
-}
-
-.aside-merch .foreground.container .action-area a.icon-area.con-button,
-.aside-merch.split.bio .foreground.container .text .action-area a.icon-area.con-button {
-  display: inline-block;
-  height: unset;
-  margin-bottom: unset;
-
-}
-
-.aside-merch .foreground.container .text div[class~="body-s"] {
-  display: block;
-}
-
-.aside-merch .foreground.container .text p[class~="body-s"]:last-of-type {
-  margin-top: 16px;
-}
-
-.aside-merch .foreground.container .text p[class~="body-s"] a:any-link {
-  color: var(--color-white);
-}
-
-.aside-merch .foreground.container .text p[class~="body-s"] merch-card a:any-link {
-  color: revert-layer;
-}
-
-.aside-merch .foreground.container .text merch-card {
-  max-width: 276px;
-  margin-left: 4px;
-}
-
-.aside-merch .fragment .section {
-  gap: 16px
-}
-
-/* center variant + split: stack content vertically, text spans full width */
-.aside-merch.split.center .foreground.container {
-  flex-direction: column;
-  align-items: center;
-  padding: var(--spacing-xl) 0;
-}
-
-.aside-merch.split.center .foreground.container .text {
-  flex: 1 0 100%;
-  max-width: 600px;
-  margin: 0;
-}
-
-/* constrain heading and body paragraphs for readability; fragment divs stay full-width */
-.aside-merch.center .foreground.container .text > :is(h1, h2, h3, h4, h5, h6),
-.aside-merch.center .foreground.container .text > p {
-  max-width: 800px;
-  margin-inline: auto;
-}
-
-.aside-merch.center .foreground.container .text > :is(h1, h2, h3, h4, h5, h6) {
-  font-size: var(--type-heading-xl-size);
-  line-height: var(--type-heading-xl-lh, 125%);
-  font-weight: 700;
-  letter-spacing: 0;
-}
-
-/* merch card sizing and gap for center variant */
-.aside-merch.center .foreground.container .text merch-card {
-  max-width: 304px;
-  width: 304px;
-}
-
-.aside-merch.center .two-merch-cards {
-  gap: 32px;
-}
-
-.aside-merch.center .foreground.container .text p[class^="body-"]:last-of-type a:any-link {
-  font-size: 16px;
-  line-height: 150%;
-  font-weight: 400;
-  text-decoration: underline;
 }
