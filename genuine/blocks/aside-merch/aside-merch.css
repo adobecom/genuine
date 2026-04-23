@@ -21,25 +21,21 @@
 
 }
 
-.aside-merch [class^="heading-"]:only-of-type,
-.aside-merch [class^="heading-"]:last-of-type {
+.aside-merch [class^="heading-"]:not(merch-card *):only-of-type,
+.aside-merch [class^="heading-"]:not(merch-card *):last-of-type {
   margin-bottom: var(--spacing-xs);
-
 }
 
-.aside-merch.promobar [class^="heading-"]:is(:only-of-type, :last-of-type) {
+.aside-merch.promobar [class^="heading-"]:not(merch-card *):is(:only-of-type, :last-of-type) {
   margin-bottom: 0;
-
 }
 
-.aside-merch [class^="body-"] {
+.aside-merch [class^="body-"]:not(merch-card *) {
   margin-bottom: var(--spacing-s);
-
 }
 
-.aside-merch.promobar [class^="body-"] {
+.aside-merch.promobar [class^="body-"]:not(merch-card *) {
   margin-bottom: 0;
-
 }
 
 .aside-merch:not(.promobar) {
@@ -1119,4 +1115,13 @@
   height: unset;
   margin-bottom: unset;
 
+}
+
+.aside-merch .foreground.container .text merch-card {
+  max-width: 276px;
+  margin-left: 4px;
+}
+
+.aside-merch .fragment .section {
+  gap: 16px
 }
