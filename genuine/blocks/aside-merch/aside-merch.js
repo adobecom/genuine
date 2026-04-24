@@ -30,13 +30,6 @@ const SPLIT_BLOCK_TEXT = ['xl', 's', 'm'];
 const medium = 'medium';
 const large = 'large';
 const FORMAT_REGEX = /^format:/i;
-const closeSvg = `<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
-                    <g transform="translate(-10500 3403)">
-                      <circle cx="10" cy="10" r="10" transform="translate(10500 -3403)" fill="#707070"></circle>
-                      <line y1="8" x2="8" transform="translate(10506 -3397)" fill="none" stroke="#fff" stroke-width="2"></line>
-                      <line x1="8" y1="8" transform="translate(10506 -3397)" fill="none" stroke="#fff" stroke-width="2"></line>
-                    </g>
-                  </svg>`;
 
 function getBlockData() {
   return SPLIT_BLOCK_TEXT;
@@ -68,128 +61,6 @@ function decorateMedia(el) {
   });
 }
 
-function formatPromoButton(el) {
-  if (!el.classList.contains('promobar')) return;
-  el.querySelectorAll('.action-area').forEach((aa) => {
-    aa.querySelectorAll('.con-button').forEach((btn) => {
-      btn.classList.add('button-l');
-      if (!el.classList.contains('popup')) return;
-      if (!btn.classList.contains('outline')) btn.classList.add('fill');
-    });
-  });
-}
-
-function addCloseButton(el) {
-  const closeBtn = createTag('button', { class: 'promo-close', 'aria-label': 'Close' }, closeSvg);
-  el.querySelector('.foreground').appendChild(closeBtn);
-  closeBtn.addEventListener('click', (e) => {
-    e.target.closest('.section').classList.add('close-sticky-section');
-    document.dispatchEvent(new CustomEvent('milo:sticky:closed'));
-  });
-}
-
-function addPromobar(sourceEl, parent) {
-  const newPromo = sourceEl.cloneNode(true);
-  parent.appendChild(newPromo);
-}
-
-function checkViewportPromobar(foreground) {
-  const { children, childElementCount: childCount } = foreground;
-  if (childCount < 2) addPromobar(children[childCount - 1], foreground);
-  if (childCount < 3) addPromobar(children[childCount - 1], foreground);
-}
-
-function toolTipPosition(container) {
-  const isRtl = document.documentElement.getAttribute('dir') === 'rtl';
-  const isTablet = container.classList.contains('tablet-up');
-  const isMobile = container.classList.contains('mobile-up');
-  if ((isRtl && isTablet) || (isMobile && !isRtl)) return 'right';
-
-  return 'left';
-}
-
-async function addTooltip(foreground) {
-  const desktopContentText = foreground.querySelector('.desktop-up .text-area')?.textContent.trim();
-  const toolTipIcons = [];
-  [...foreground.querySelectorAll(':scope > div:not(.desktop-up)')].forEach((viewPortEl) => {
-    const childContent = viewPortEl.querySelector('.text-area');
-    const childContentText = childContent.textContent.trim();
-    if (childContentText === desktopContentText) return;
-    const appendTarget = viewPortEl.querySelector('.text-area').lastElementChild;
-    const iconWrapper = createTag('em', {}, `${toolTipPosition(viewPortEl)}|${desktopContentText}`);
-    iconWrapper.style.display = 'none';
-    const tooltipSpan = createTag('span', { class: 'icon icon-tooltip' });
-    iconWrapper.appendChild(tooltipSpan);
-    toolTipIcons.push(tooltipSpan);
-    appendTarget.appendChild(iconWrapper);
-  });
-
-  if (!toolTipIcons.length) return;
-
-  const config = getConfig();
-  const { miloLibs, codeRoot } = config;
-  const base = miloLibs || codeRoot;
-  const { default: loadIcons } = await import(`${base}/features/icons/icons.js`);
-  loadStyle(`${base}/features/icons/icons.css`);
-  loadIcons(toolTipIcons, config);
-}
-
-function combineTextBlocks(textBlocks, iconArea, viewPort, variant) {
-  const promobarConfig = {
-    default: {
-      'mobile-up': ['s', 's'],
-      'tablet-up': ['s', 's'],
-      'desktop-up': ['m', 'l'],
-    },
-    popup: {
-      'mobile-up': ['s', 's'],
-      'tablet-up': ['l', 'm'],
-      'desktop-up': ['xxl', 'xl'],
-    },
-  };
-  const textStyle = promobarConfig[variant][viewPort];
-  const contentArea = createTag('p', { class: 'content-area' });
-  const textArea = createTag('p', { class: 'text-area' });
-  textBlocks[0].parentElement.prepend(contentArea);
-  textBlocks.forEach((textBlock) => {
-    textArea.appendChild(textBlock);
-    if (textBlock.nodeName === 'P') {
-      textBlock.classList.add(`body-${textStyle[1]}`);
-    } else {
-      textBlock.classList.add(`heading-${textStyle[0]}`);
-    }
-  });
-  if (iconArea) {
-    if (iconArea.innerText?.trim()) iconArea.classList.add('detail-xs');
-    iconArea.classList.add('icon-area');
-    contentArea.appendChild(iconArea);
-  }
-  contentArea.appendChild(textArea);
-}
-
-function decoratePromobar(el) {
-  const viewports = ['mobile-up', 'tablet-up', 'desktop-up'];
-  const foreground = el.querySelector('.foreground');
-  const variant = el.classList.contains('popup') ? 'popup' : 'default';
-  if (foreground.childElementCount !== 3) checkViewportPromobar(foreground);
-  [...foreground.children].forEach((child, index) => {
-    child.className = viewports[index];
-    child.classList.add('promo-text');
-    const textBlocks = [...child.children];
-    const iconArea = child.querySelector('picture')?.closest('p');
-    const actionArea = child.querySelectorAll('em a, strong a, p > a strong');
-    if (iconArea) textBlocks.shift();
-    if (actionArea.length) textBlocks.pop();
-    if (!(textBlocks.length || iconArea || actionArea.length)) child.classList.add('hide-block');
-    else if (textBlocks.length) combineTextBlocks(textBlocks, iconArea, viewports[index], variant);
-  });
-  if (variant === 'popup') {
-    addCloseButton(el);
-    addTooltip(foreground);
-  }
-  return foreground;
-}
-
 function loadIconography() {
   const { miloLibs, codeRoot } = getConfig();
   const base = miloLibs || codeRoot;
@@ -216,8 +87,7 @@ function decorateLayout(el) {
   }
   const foreground = elems[elems.length - 1];
   foreground.classList.add('foreground', 'container');
-  if (el.classList.contains('promobar')) return decoratePromobar(el);
-  if (!el.classList.contains('promobar')) el.classList.add('split');
+  el.classList.add('split');
   decorateMedia(el); // why?
   const text = foreground.querySelector('h1, h2, h3, h4, h5, h6, p')?.closest('div');
   text?.classList.add('text');
@@ -277,7 +147,6 @@ export default function init(el) {
   const blockData = getBlockData();
   const blockText = decorateLayout(el);
   decorateBlockText(blockText, blockData);
-  formatPromoButton(el);
   decorateTextOverrides(el);
   // Override Detail with Title L style if class exists - Temporary solution until Spectrum 2
   if (el.classList.contains('l-title')) el.querySelector('[class*="detail-"]')?.classList.add('title-l');
