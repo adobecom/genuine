@@ -31,10 +31,6 @@ const medium = 'medium';
 const large = 'large';
 const FORMAT_REGEX = /^format:/i;
 
-function getBlockData() {
-  return SPLIT_BLOCK_TEXT;
-}
-
 function decorateMedia(el) {
   if (!(el.classList.contains(medium) || el.classList.contains(large))) return;
   const allMedia = el.querySelectorAll('div > p video, div > p picture');
@@ -59,6 +55,15 @@ function decorateMedia(el) {
     parentP.remove();
     return true;
   });
+}
+
+// Priority: foreground video/media > background video/media > foreground image > background image
+function findBlockMedia(el, foreground) {
+  const foregroundImage = foreground.querySelector(':scope > div:not(.text) img')?.closest('div');
+  const bgImage = el.querySelector(':scope > div:not(.text):not(.foreground):not(.background) img')?.closest('div');
+  const foregroundMedia = foreground.querySelector(':scope > div:not(.text) :is(.video-container, video, a[href*=".mp4"], a[href*="tv.adobe.com"]), :scope > div:not(.text) iframe[src*="tv.adobe.com"]')?.closest('div:not(.video-container)');
+  const bgMedia = el.querySelector(':scope > div:not(.text):not(.foreground):not(.background) video, :scope > div:not(.text):not(.foreground):not(.background) a:is([href*=".mp4"], [href*="tv.adobe.com"])')?.closest('div');
+  return foregroundMedia ?? bgMedia ?? foregroundImage ?? bgImage;
 }
 
 function loadIconography() {
@@ -107,15 +112,8 @@ function decorateLayout(el) {
     const iconAreaImage = iconArea.querySelector('img');
     handleImageLoad(el, iconAreaImage);
   }
-  const foregroundImage = foreground.querySelector(':scope > div:not(.text) img')?.closest('div');
-  const bgImage = el.querySelector(':scope > div:not(.text):not(.foreground):not(.background) img')?.closest('div');
-  const foregroundMedia = foreground.querySelector(':scope > div:not(.text) :is(.video-container, video, a[href*=".mp4"], a[href*="tv.adobe.com"]), :scope > div:not(.text) iframe[src*="tv.adobe.com"]')
-    ?.closest('div:not(.video-container)');
-  const bgMedia = el.querySelector(':scope > div:not(.text):not(.foreground):not(.background) video, :scope > div:not(.text):not(.foreground):not(.background) a:is([href*=".mp4"], [href*="tv.adobe.com"])')?.closest('div');
-  const image = foregroundImage ?? bgImage;
-  const asideMedia = foregroundMedia ?? bgMedia ?? image;
-  const hasMedia = foregroundImage ?? foregroundMedia ?? asideMedia;
-  if (!hasMedia) el.classList.add('no-media');
+  const asideMedia = findBlockMedia(el, foreground);
+  if (!asideMedia) el.classList.add('no-media');
   if (asideMedia && !asideMedia.classList.contains('text')) {
     asideMedia.classList.add('split-image');
     const position = [...asideMedia.parentNode.children].indexOf(asideMedia);
@@ -142,9 +140,8 @@ function decorateLayout(el) {
 
 export default function init(el) {
   el.classList.add('con-block');
-  const blockData = getBlockData();
   const blockText = decorateLayout(el);
-  decorateBlockText(blockText, blockData);
+  decorateBlockText(blockText, SPLIT_BLOCK_TEXT);
   decorateTextOverrides(el);
   if (el.classList.contains('l-title')) el.querySelector('[class*="detail-"]')?.classList.add('title-l');
 }
