@@ -1,5 +1,6 @@
 :root {
     --aside-merch-spacing-xs: 12px;
+    --aside-merch-split-height: 270px;
 }
 
 .aside-merch {
@@ -144,7 +145,7 @@
 .aside-merch.split .split-image img,
 .aside-merch.split .split-image video {
   position: relative;
-  min-height: 270px;
+  min-height: var(--aside-merch-split-height);
 }
 
 .aside-merch.split .split-image video {
@@ -243,7 +244,7 @@
 .aside-merch.split .foreground.container .split-image img,
 .aside-merch.split .foreground.container .split-image video {
   object-fit: cover;
-  height: 270px;
+  height: var(--aside-merch-split-height);
 }
 
 .aside-merch.center .foreground.container .icon-area {
