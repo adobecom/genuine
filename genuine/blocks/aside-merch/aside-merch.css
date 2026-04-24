@@ -1,6 +1,7 @@
 :root {
     --aside-merch-spacing-xs: 12px;
     --aside-merch-split-height: 270px;
+    --aside-merch-border-radius-xs: 16px;
 }
 
 .aside-merch {
@@ -231,7 +232,7 @@
 .aside-merch.rounded-corners .foreground .image:not(:has(.video-container)) .pause-play-wrapper,
 .aside-merch.rounded-corners .foreground .image video:not(merch-card *),
 .aside-merch.rounded-corners .foreground.container .image .milo-video iframe {
-  border-radius: 16px;
+  border-radius: var(--aside-merch-border-radius-xs);
 }
 
 .aside-merch .foreground.container .image video:not(merch-card *),
