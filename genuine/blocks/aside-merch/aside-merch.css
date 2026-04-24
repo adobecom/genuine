@@ -94,7 +94,7 @@
 }
 
 .aside-merch.simple .foreground.container .text {
-  margin-bottom: 80px;
+  margin-bottom: var(--spacing-xxxl);
 }
 
 .aside-merch .foreground.container .image {
@@ -353,7 +353,7 @@
 }
 
 .aside-merch .fragment .section {
-  gap: 16px
+  gap: 16px;
 }
 
 /* center variant + split: stack content vertically, text spans full width */
