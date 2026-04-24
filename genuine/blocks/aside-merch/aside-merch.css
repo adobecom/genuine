@@ -225,8 +225,8 @@
   flex-direction: column-reverse;
 }
 
-.aside-merch.split.large.aside-merch.media-top-mobile,
-.aside-merch.split.large.aside-merch.media-bottom-mobile {
+.aside-merch.split.large.media-top-mobile,
+.aside-merch.split.large.media-bottom-mobile {
   flex-direction: column;
 }
 
