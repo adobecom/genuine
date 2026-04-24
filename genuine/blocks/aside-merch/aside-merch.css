@@ -310,7 +310,7 @@
 }
 
 .aside-merch .foreground.container .text p[class^="body-"]:not(merch-card *):last-of-type {
-  margin-top: 16px;
+  margin-top: var(--spacing-xs);
 }
 
 .aside-merch.one-third .foreground.container .text .two-merch-cards {
