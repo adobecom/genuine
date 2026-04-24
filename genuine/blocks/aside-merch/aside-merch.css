@@ -1,3 +1,7 @@
+:root {
+    --aside-merch-spacing-xs: 12px;
+}
+
 .aside-merch {
   min-height: 160px;
   display: flex;
@@ -104,7 +108,7 @@
 .aside-merch.split .icon-stack-area li a {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--aside-merch-spacing-xs);
   font-weight: bold;
 }
 
@@ -248,7 +252,7 @@
 }
 
 .aside-merch .foreground.container .icon-area:not(.con-button) {
-  max-height: 80px;
+  max-height: var(--spacing-xxxl);
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
@@ -274,7 +278,7 @@
 .aside-merch.split .icon-stack-area {
   display: flex;
   flex-flow: row wrap;
-  gap: 12px;
+  gap: var(--aside-merch-spacing-xs);
   margin: -8px 0 var(--spacing-s);
   width: 100%;
   padding: 0;
@@ -313,7 +317,7 @@
   
   padding-inline-start: 0;
   justify-content: start;
-  gap: 24px;
+  gap: var(--spacing-s);
 
 }
 
@@ -330,7 +334,7 @@
 }
 
 .aside-merch .fragment .section {
-  gap: 16px;
+  gap: var(--spacing-xs);
 }
 
 /* center variant + split: stack content vertically, text spans full width */
@@ -367,7 +371,7 @@
 }
 
 .aside-merch.center .two-merch-cards {
-  gap: 32px;
+  gap: var(--spacing-m);
 }
 
 .aside-merch.center .foreground.container .text p[class^="body-"]:not(merch-card *):last-of-type a:any-link {
