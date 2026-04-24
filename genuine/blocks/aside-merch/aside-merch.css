@@ -349,8 +349,12 @@
   max-width: var(--aside-merch-one-third-card-width);
 }
 
-.aside-merch .foreground.container .text p[class^="body-"]:not(merch-card *) a:any-link {
+.aside-merch.dark .foreground.container .text p[class^="body-"]:not(merch-card *) a:any-link {
   color: var(--color-white);
+}
+
+.aside-merch .foreground.container .text p[class^="body-"]:not(merch-card *) a:any-link {
+  color: var(--color-black);
 }
 
 .aside-merch .foreground.container .text p[class^="body-"]:not(merch-card *) merch-card a:any-link {
