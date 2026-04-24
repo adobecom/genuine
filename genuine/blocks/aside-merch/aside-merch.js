@@ -88,7 +88,7 @@ function decorateLayout(el) {
   const foreground = elems[elems.length - 1];
   foreground.classList.add('foreground', 'container');
   el.classList.add('split');
-  decorateMedia(el); // why?
+  decorateMedia(el);
   const text = foreground.querySelector('h1, h2, h3, h4, h5, h6, p')?.closest('div');
   text?.classList.add('text');
   const media = foreground.querySelector(':scope > div:not([class])');
@@ -125,7 +125,6 @@ function decorateLayout(el) {
     foreground?.classList.add('no-image');
   }
   decorateIconStack(el);
-  // TODO: Remove after bugfix PR adobe/helix-html2md#556 is merged
   const icnStk = el.querySelector('.icon-stack-area');
   if (icnStk) {
     const liELs = icnStk.querySelectorAll('li');
@@ -138,7 +137,6 @@ function decorateLayout(el) {
       });
     });
   }
-  // TODO: Remove after bugfix PR adobe/helix-html2md#556 is merged
   return foreground;
 }
 
@@ -148,6 +146,5 @@ export default function init(el) {
   const blockText = decorateLayout(el);
   decorateBlockText(blockText, blockData);
   decorateTextOverrides(el);
-  // Override Detail with Title L style if class exists - Temporary solution until Spectrum 2
   if (el.classList.contains('l-title')) el.querySelector('[class*="detail-"]')?.classList.add('title-l');
 }
