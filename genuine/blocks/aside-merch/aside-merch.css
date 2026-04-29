@@ -498,7 +498,7 @@
   .aside-merch .split-image .modal-img-link, .aside-merch.split.half .split-image img, .aside-merch.split.half .split-image video {
     width: 50vw;
     max-width: var(--aside-merch-max-width);
-    object-position: left top;
+    object-position: center top;
   }
 
   .aside-merch.split.one-third .split-image .modal-img-link,
