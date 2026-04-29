@@ -163,7 +163,7 @@ const CONFIG = {
     stageURL: 'https://bfp-stage.adobe.com/bfp/v1/bfp.min.js',
     prodURL: 'https://bfp.adobe.com/bfp/v1/bfp.min.js',
     apiKey: 'genuine-bfp-milo',
-    clientId: 'adobedotcom-cc',
+    clientId: window.adobeIMS?.serviceRequest?.clientId ?? 'adobedotcom-cc',
   },
   uniqueSiteId: 'genuine',
   mepLingoCountryToRegion: {
