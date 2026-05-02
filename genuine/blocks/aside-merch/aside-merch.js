@@ -30,13 +30,6 @@ const SPLIT_BLOCK_TEXT = ['xl', 's', 'm'];
 const medium = 'medium';
 const large = 'large';
 const FORMAT_REGEX = /^format:/i;
-const AnalyticsKeys = {
-  explore: 'Explore All Plans|AsideMerch',
-  buy: 'Buy Now|AsideMerch',
-  learn: 'Learn More|AsideMerch',
-  discount: 'See Discounts|AsideMerch',
-  default: 'Link|AsideMerch',
-};
 
 function decorateMedia(el) {
   if (!(el.classList.contains(medium) || el.classList.contains(large))) return;
@@ -145,19 +138,10 @@ function decorateLayout(el) {
   return foreground;
 }
 
-function addAnalytics(el) {
-  const links = [...el.querySelectorAll('a:not(merch-card *), button:not(merch-card *)')];
-  links.forEach((link) => {
-    const key = Object.keys(AnalyticsKeys).find((param) => link.href?.includes(`#${param}`)) ?? 'default';
-    link.setAttribute('daa-ll', AnalyticsKeys[key]);
-  });
-}
-
 export default function init(el) {
   el.classList.add('con-block');
   const blockText = decorateLayout(el);
   decorateBlockText(blockText, SPLIT_BLOCK_TEXT);
   decorateTextOverrides(el);
   if (el.classList.contains('l-title')) el.querySelector('[class*="detail-"]')?.classList.add('title-l');
-  addAnalytics(el);
 }
