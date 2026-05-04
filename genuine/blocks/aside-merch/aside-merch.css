@@ -1,0 +1,756 @@
+:root {
+    --aside-merch-max-width: 1396px;
+    --aside-merch-min-height-tablet-small: 420px;
+    --aside-merch-min-height-tablet-medium: 560px;
+    --aside-merch-min-height-tablet-large: 700px;
+    --aside-merch-spacing-xs: 12px;
+    --aside-merch-split-height: 270px;
+    --aside-merch-border-radius-xs: 16px;
+    --aside-merch-one-third-card-width: 276px;
+    --aside-merch-center-card-width: 304px;
+    --aside-merch-half-card-width: 378px;
+}
+
+.aside-merch {
+  min-height: 160px;
+  display: flex;
+  width: 100%;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.dark .aside-merch,
+.aside-merch.dark {
+  color: var(--color-white);
+}
+
+.aside-merch p:not(merch-card *) {
+  margin: 0;
+}
+
+.aside-merch [class^="heading-"]:not(merch-card *):only-of-type,
+.aside-merch [class^="heading-"]:not(merch-card *):last-of-type {
+  margin-bottom: var(--spacing-xs);
+}
+
+.aside-merch [class^="body-"]:not(merch-card *) {
+  margin-bottom: var(--spacing-s);
+}
+
+.aside-merch [class^="detail-"]:not(merch-card *) {
+  margin-bottom: var(--spacing-xs);
+}
+
+.aside-merch .title-l {
+  font-size: var(--type-body-m-size);
+  line-height: var(--type-body-m-lh);
+  font-weight: bold;
+  text-transform: none;
+  margin-bottom: var(--spacing-xs);
+}
+
+.aside-merch .background picture {
+  display: block;
+  height: 100%;
+}
+
+.aside-merch .background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.aside-merch.split picture:not(merch-card *) {
+  display: flex;
+}
+
+.aside-merch .split-image img,
+.aside-merch .split-image video {
+  object-fit: cover;
+  min-height: 700px;
+  width: 100%;
+  height: 100%;
+}
+
+.aside-merch .foreground.container {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: var(--spacing-m);
+  padding: var(--spacing-xl) 0;
+  box-sizing: border-box;
+}
+
+.aside-merch .foreground.container .text {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.aside-merch.split .foreground.container .text {
+  margin: 0;
+  max-width: var(--grid-container-width);
+}
+
+.aside-merch.media-top-mobile .foreground .image,
+.aside-merch.media-top-mobile .split-image {
+  order: -1;
+}
+
+.aside-merch.media-bottom-mobile .foreground .image,
+.aside-merch.media-bottom-mobile .split-image {
+  order: 1;
+}
+
+.aside-merch .foreground.container .image {
+  position: relative;
+  display: flex;
+  width: 100%;
+}
+
+.aside-merch .foreground.container > div {
+  flex-grow: 1;
+  flex-basis: 0;
+  min-width: 0;
+}
+
+.aside-merch.split .icon-stack-area li {
+  width: fit-content;
+  min-width: calc(50% - 6px);
+}
+
+.aside-merch.split .icon-stack-area li,
+.aside-merch.split .icon-stack-area li a {
+  display: flex;
+  align-items: center;
+  gap: var(--aside-merch-spacing-xs);
+  font-weight: bold;
+}
+
+.aside-merch .foreground.container .text > * {
+  width: 100%;
+}
+
+.aside-merch .foreground.container .text .supplemental-text {
+  margin-top: var(--spacing-s);
+  margin-bottom: 0;
+  font-size: var(--type-body-s-size);
+  line-height: var(--type-body-s-lh);
+}
+
+.aside-merch .foreground.container .text .action-area {
+  margin-bottom: 0;
+  display: flex;
+  gap: var(--spacing-s);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.aside-merch .foreground.container a.icon-area {
+  height: auto;
+  margin-bottom: 0;
+}
+
+.aside-merch .avatar-area,
+.aside-merch .lockup-area {
+  margin-bottom: var(--spacing-s);
+}
+
+.aside-merch.split .split-image img,
+.aside-merch.split .split-image video {
+  position: relative;
+  min-height: var(--aside-merch-split-height);
+}
+
+.aside-merch.split .split-image video {
+  display: block;
+}
+
+.aside-merch.split .mobile-square img,
+.aside-merch.split .mobile-square video {
+  aspect-ratio: var(--aspect-ratio-square);
+}
+
+.aside-merch.split .mobile-wide img,
+.aside-merch.split .mobile-wide video {
+  aspect-ratio: var(--aspect-ratio-wide);
+}
+
+.aside-merch.split .mobile-standard img,
+.aside-merch.split .mobile-standard video {
+  aspect-ratio: var(--aspect-ratio-standard);
+}
+
+.aside-merch.split .format img,
+.aside-merch.split .format video {
+  height: auto;
+}
+
+.aside-merch.split .icon-stack-area li img:not(merch-card *) {
+  width: var(--icon-size-m);
+  height: auto;
+}
+
+.aside-merch.split .format picture:not(merch-card *),
+.aside-merch.split .format video:not(merch-card *) {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+.aside-merch.split .icon-stack-area li picture:not(merch-card *) {
+  flex-shrink: 0;
+}
+
+.aside-merch .foreground.container .icon-area picture:not(merch-card *) {
+  height: 100%;
+}
+
+.aside-merch .foreground.container .icon-area img:not(merch-card *) {
+  max-height: 100%;
+  width: auto;
+  object-fit: cover;
+  object-position: left top;
+}
+
+.aside-merch.split {
+  flex-direction: column;
+}
+
+.aside-merch.split.large {
+  flex-direction: column-reverse;
+}
+
+.aside-merch.split.large.media-top-mobile,
+.aside-merch.split.large.media-bottom-mobile {
+  flex-direction: column;
+}
+
+.aside-merch.split.half .background {
+  min-height: 280px;
+}
+
+.aside-merch.split .foreground.container {
+  width: 100%;
+  max-width: 100%;
+  flex-direction: column;
+  z-index: 1;
+}
+
+.aside-merch.split.large .background {
+  background-color: transparent;
+}
+
+.aside-merch.split .foreground.container .image {
+  margin: 0;
+  display: none;
+}
+
+.aside-merch.rounded-corners .foreground .image img:not(merch-card *),
+.aside-merch.rounded-corners .foreground .image:not(:has(.video-container)) .pause-play-wrapper,
+.aside-merch.rounded-corners .foreground .image video:not(merch-card *),
+.aside-merch.rounded-corners .foreground.container .image .milo-video iframe {
+  border-radius: var(--aside-merch-border-radius-xs);
+}
+
+.aside-merch .foreground.container .image video:not(merch-card *),
+.aside-merch .foreground.container .image picture:not(merch-card *),
+.aside-merch .foreground.container .image picture img:not(merch-card *) {
+  width: 100%;
+  display: flex;
+}
+
+.aside-merch.split .foreground.container .split-image img,
+.aside-merch.split .foreground.container .split-image video {
+  object-fit: cover;
+  height: var(--aside-merch-split-height);
+}
+
+.aside-merch.center .foreground.container .icon-area {
+  justify-content: center;
+  max-width: 100%;
+}
+
+.aside-merch .foreground.container .icon-area:not(.con-button) {
+  max-height: var(--spacing-xxxl);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  line-height: 0;
+  margin-bottom: var(--spacing-s);
+  font-weight: bold;
+}
+
+.aside-merch.center .foreground.container .text {
+  margin: var(--spacing-xxxl) 0;
+  text-align: center;
+  padding: 0;
+}
+
+.aside-merch.center .foreground.container {
+  padding: 0;
+}
+
+.aside-merch.no-media .foreground.container {
+  gap: 0;
+}
+
+.aside-merch.split .icon-stack-area {
+  display: flex;
+  flex-flow: row wrap;
+  gap: var(--aside-merch-spacing-xs);
+  margin: -8px 0 var(--spacing-s);
+  width: 100%;
+  padding: 0;
+  list-style-type: none;
+}
+
+.aside-merch.center .foreground.container .text .action-area {
+  justify-content: center;
+}
+
+.aside-merch.split .image.format {
+  display: flex;
+}
+
+.aside-merch.split.bio .foreground.container .text .icon-area:not(.con-button) {
+  display: none;
+}
+
+.aside-merch .foreground.container .action-area a.icon-area.con-button,
+.aside-merch.split.bio .foreground.container .text .action-area a.icon-area.con-button {
+  display: inline-block;
+  height: unset;
+  margin-bottom: unset;
+}
+
+.aside-merch .foreground.container .text div[class^="body-"]:not(merch-card *) {
+  display: block;
+}
+
+.aside-merch .foreground.container .text p[class^="body-"]:not(merch-card *):last-of-type {
+  margin-top: var(--spacing-xs);
+}
+
+.aside-merch.one-third .foreground.container .text .two-merch-cards {
+  --merch-card-collection-card-width: var(--aside-merch-one-third-card-width);
+  
+  padding-inline-start: 0;
+  justify-content: start;
+  gap: var(--spacing-s);
+
+}
+
+.aside-merch.one-third .foreground.container .text merch-card {
+  max-width: var(--aside-merch-one-third-card-width);
+}
+
+.aside-merch.dark .foreground.container .text p[class^="body-"]:not(merch-card *) a:any-link {
+  color: var(--color-white);
+}
+
+.aside-merch .foreground.container .text p[class^="body-"]:not(merch-card *) a:any-link {
+  color: var(--text-color);
+}
+
+.aside-merch .foreground.container .text p[class^="body-"]:not(merch-card *) merch-card a:any-link {
+  color: revert-layer;
+}
+
+.aside-merch .fragment .section {
+  gap: var(--spacing-xs);
+}
+
+/* center variant + split: stack content vertically, text spans full width */
+.aside-merch.split.center .foreground.container {
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-xl) 0;
+}
+
+.aside-merch.split.center .foreground.container .text {
+  flex: 1 0 100%;
+  max-width: 600px;
+  margin: 0;
+}
+
+/* constrain heading and body paragraphs for readability; fragment divs stay full-width */
+.aside-merch.center .foreground.container .text > :is(h1, h2, h3, h4, h5, h6),
+.aside-merch.center .foreground.container .text > p {
+  max-width: 800px;
+}
+
+.aside-merch.center .foreground.container .text > :is(h1, h2, h3, h4, h5, h6) {
+  font-size: var(--type-heading-xl-size);
+  line-height: var(--type-heading-xl-lh, 125%);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+/* merch card sizing and gap for center variant */
+.aside-merch.center .foreground.container .text merch-card {
+  max-width: var(--aside-merch-center-card-width);
+  width: var(--aside-merch-center-card-width);
+}
+
+.aside-merch.center .two-merch-cards {
+  gap: var(--spacing-m);
+}
+
+.aside-merch.center .foreground.container .text p[class^="body-"]:not(merch-card *):last-of-type a:any-link {
+  font-size: 16px;
+  line-height: 150%;
+  font-weight: 400;
+  text-decoration: underline;
+}
+
+.aside-merch.split.half .foreground.container .text merch-card {
+  width: var(--aside-merch-half-card-width);
+  max-width: 100%;
+}
+
+.aside-merch merch-card {
+  --merch-card-plans-padding: 18px;
+}
+
+.aside-merch merch-card [slot="body-xs"] p:not(:has(a)) {
+  padding-inline-start: 1em;
+  text-indent: -1em;
+}
+
+.aside-merch merch-card [slot="body-xs"] p:has(a) + p:not(:has(a)) {
+  margin-top: var(--spacing-s);
+}
+
+@media screen and (min-width: 600px) {
+  .aside-merch.small {
+    min-height: var(--aside-merch-min-height-tablet-small);
+  }
+
+  .aside-merch.medium {
+    min-height: var(--aside-merch-min-height-tablet-medium);
+  }
+
+  .aside-merch.large {
+    min-height: var(--aside-merch-min-height-tablet-large);
+  }
+
+  .aside-merch.media-top-mobile .foreground .image, .aside-merch.media-top-mobile .split-image {
+    order: unset;
+  }
+
+  .aside-merch.media-bottom-mobile .foreground .image, .aside-merch.media-bottom-mobile .split-image {
+    order: unset;
+  }
+
+  .aside-merch .foreground.container {
+    align-items: center;
+    flex-direction: row;
+    margin: 0 auto;
+  }
+
+  .aside-merch .foreground.container .image {
+    margin: 0;
+  }
+
+  .aside-merch .foreground.container .text.image {
+    justify-content: flex-start;
+  }
+
+  .aside-merch .background, .aside-merch.split .split-image {
+    overflow: hidden;
+    position: absolute;
+    inset: 0;
+  }
+
+  .aside-merch .foreground.container .text {
+    margin-bottom: 0;
+  }
+
+  .aside-merch.split-right .foreground.container .text {
+    padding-inline-start: var(--spacing-s);
+  }
+
+  .aside-merch.split .tablet-wide img, .aside-merch.split .tablet-wide video {
+    aspect-ratio: var(--aspect-ratio-wide);
+  }
+
+  .aside-merch.split .tablet-standard img, .aside-merch.split .tablet-standard video {
+    aspect-ratio: var(--aspect-ratio-standard);
+  }
+
+  .aside-merch.split.large {
+    flex-direction: column;
+  }
+
+  .aside-merch .split-image .modal-img-link, .aside-merch.split .split-image img, .aside-merch.split .split-image video {
+    width: 50vw;
+    position: absolute;
+    inset-inline-end: 0;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .aside-merch.split .split-image img.accessibility-control {
+    position: relative;
+  }
+
+  .aside-merch .split-image .modal-img-link, .aside-merch.split.half .split-image img, .aside-merch.split.half .split-image video {
+    width: 50vw;
+    max-width: var(--aside-merch-max-width);
+    object-position: center top;
+  }
+
+  .aside-merch.split.one-third .split-image .modal-img-link,
+  .aside-merch.split.one-third .split-image img,
+  .aside-merch.split.one-third .split-image video {
+    width: 33.333vw;
+  }
+
+  .aside-merch.split.split-left .split-image img, .aside-merch.split.split-left .split-image video {
+    inset-inline-end: 0;
+    inset-inline-start: auto;
+  }
+
+  .aside-merch.split.split-right .split-image img, .aside-merch.split.split-right .split-image video {
+    inset-inline-start: 0;
+    inset-inline-end: auto;
+  }
+
+  .aside-merch.split.one-third.split.half .split-image img,
+  .aside-merch.split.one-third.split.half .split-image video {
+    width: 33.333vw;
+    max-width: none;
+  }
+
+  .aside-merch.split .foreground.container {
+    flex-direction: row;
+    justify-content: stretch;
+    max-width: var(--grid-container-width);
+    margin: 0 auto;
+    background-color: transparent;
+  }
+
+  .aside-merch.split .foreground.container .text {
+    flex: 0 0 41.67%;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .aside-merch.split .foreground.container .image {
+    object-fit: cover;
+    flex: 0 0 61%;
+    display: block;
+    padding: 0;
+  }
+
+  /* split + one-third: image covers left ⅓, content fills right ⅔ with 62px gap */
+  .aside-merch.split.one-third .background {
+    inset-inline-end: 66.666%;
+  }
+
+  .aside-merch.split.one-third .foreground.container {
+    max-width: 100%;
+    padding-inline-start: calc(33.333% + 38px);
+    flex-direction: column;
+    align-items: stretch;
+    box-sizing: border-box;
+  }
+
+  .aside-merch.split.one-third .foreground.container .text {
+    flex: 1 0 100%;
+    max-width: 100%;
+  }
+
+  .aside-merch.split.one-third .foreground.container .image {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+  }
+
+  .aside-merch.split.half .background {
+    inset-inline-end: 50%;
+  }
+
+  .aside-merch.split.half .foreground.container {
+    max-width: 100%;
+    padding-inline-start: 50%;
+    flex-direction: column;
+    align-items: stretch;
+    box-sizing: border-box;
+  }
+
+  .aside-merch.split.half .foreground.container .text {
+    flex: 1 0 100%;
+    max-width: 100%;
+    padding: 0 var(--spacing-xl);
+    margin-inline-start: 14px;
+    box-sizing: border-box;
+  }
+
+  .aside-merch.split.bio .foreground.container .text .icon-area:not(.con-button) {
+    display: block;
+  }
+
+  .aside-merch.medium.split.bio .foreground.container .text .icon-area, .aside-merch.large.split.bio .foreground.container .text .icon-area {
+    height: var(--icon-size-xxl);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .aside-merch.medium.split.bio .foreground.container .text .icon-area img:not(merch-card *), .aside-merch.large.split.bio .foreground.container .text .icon-area img:not(merch-card *) {
+    width: var(--icon-size-xxl);
+    height: var(--icon-size-xxl);
+    border-radius: 50%;
+  }
+
+}
+
+@media (min-width: 600px) and (max-width: 1199px) {
+  .aside-merch.media-top-tablet .foreground.container, .aside-merch.media-bottom-tablet .foreground.container {
+    justify-content: center;
+    flex-direction: column;
+    gap: var(--spacing-l);
+    padding: var(--spacing-xl) 0;
+  }
+
+  .aside-merch.media-top-tablet .foreground.container .text, .aside-merch.media-bottom-tablet .foreground.container .text {
+    padding-inline-end: 0;
+  }
+
+  .aside-merch.media-top-tablet .foreground .image, .aside-merch.split.media-top-tablet .split-image {
+    order: -1;
+  }
+
+  .aside-merch.media-bottom-tablet .foreground .image, .aside-merch.split.media-bottom-tablet .split-image {
+    order: 100;
+  }
+
+  .aside-merch.large.media-top-tablet, .aside-merch.large.media-bottom-tablet {
+    min-height: auto;
+  }
+
+  .aside-merch.split.large.media-top-tablet .foreground.container .text, .aside-merch.split.large.media-bottom-tablet .foreground.container .text {
+    padding: 0;
+    flex: 0 0 100%;
+  }
+
+  .aside-merch.split.media-top-tablet .split-image, .aside-merch.split.media-bottom-tablet .split-image {
+    position: relative;
+  }
+
+  .aside-merch.split.media-top-tablet .split-image img, .aside-merch.split.media-bottom-tablet .split-image img, .aside-merch.split:is(.media-top-tablet, .media-bottom-tablet) .split-image video {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .aside-merch.split.media-top-tablet .text .icon-stack-area, .aside-merch.split.media-bottom-tablet .text .icon-stack-area {
+    width: 83.33%;
+  }
+
+  .aside-merch.split.media-top-tablet .icon-stack-area li, .aside-merch.split.media-bottom-tablet .icon-stack-area li {
+    width: calc(50% - 6px);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .aside-merch .foreground.container {
+    width: var(--grid-container-width);
+    gap: var(--grid-column-width);
+  }
+
+  .aside-merch .foreground.container > div {
+    object-fit: cover;
+    padding-inline-start: 0;
+  }
+
+  .aside-merch .foreground.container .text {
+    flex: 1 0 calc(var(--grid-column-width) * 6);
+  }
+
+  .aside-merch.center .foreground.container .text {
+    max-width: 50%;
+  }
+
+  .aside-merch.split .foreground.container .text {
+    flex: 0 0 29%;
+  }
+
+  .aside-merch.split.half .foreground.container .text {
+    max-width: 100%;
+  }
+
+  .two-up.grid-width-12 .aside-merch .foreground.container .text {
+    flex: 1 0 100%;
+  }
+
+  .aside-merch .foreground.container .image {
+    flex: 1 0 calc(var(--grid-column-width) * 5);
+  }
+
+  .aside-merch.split .foreground.container .image {
+    flex: 0 0 70%;
+    max-width: none;
+    object-fit: cover;
+  }
+
+  .aside-merch.split.one-third .foreground.container .text {
+    flex: 1 0 100%;
+    max-width: 100%;
+  }
+
+  .aside-merch.split.one-third .foreground.container .image {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+  }
+
+  .aside-merch .split-image .modal-img-link, .aside-merch.split .split-image img, .aside-merch.split .split-image video {
+    width: 60.5vw;
+  }
+
+  .aside-merch.split .split-image img, .aside-merch.split .split-image video {
+    max-width: var(--aside-merch-max-width);
+  }
+
+  .aside-merch.split .desktop-wide img, .aside-merch.split .desktop-wide video {
+    aspect-ratio: var(--aspect-ratio-wide);
+  }
+
+  .aside-merch.split .desktop-standard img, .aside-merch.split .desktop-standard video {
+    aspect-ratio: var(--aspect-ratio-standard);
+  }
+
+  .aside-merch.split.one-third .split-image .modal-img-link,
+  .aside-merch.split.one-third .split-image img,
+  .aside-merch.split.one-third .split-image video {
+    width: 33.333vw;
+    max-width: 100%;
+  }
+
+  .aside-merch.split .icon-stack-area li {
+    width: calc(50% - 6px);
+  }
+
+  .aside-merch.split .icon-stack-area {
+    flex-direction: row;
+  }
+
+  .aside-merch.center .two-merch-cards {
+    gap: 60px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .aside-merch.split .foreground.container .text {
+    flex: 0 0 calc(500px - 10.5vw);
+  }
+
+  .aside-merch.split.one-third .foreground.container .text {
+    flex: 1 0 100%;
+    max-width: 100%;
+  }
+}
+
