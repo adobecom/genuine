@@ -1,5 +1,4 @@
 :root {
-    --aside-merch-container-width: 83.4%;
     --aside-merch-max-width: 1396px;
     --aside-merch-min-height-tablet-small: 420px;
     --aside-merch-min-height-tablet-medium: 560px;
@@ -426,13 +425,6 @@
 .aside-merch merch-card [slot="body-xs"] p:has(a) + p:not(:has(a)) {
   margin-top: var(--spacing-s);
 }
-
-/* .aside-merch.split .foreground.container .text > [class^="heading-"]:not(merch-card *),
-.aside-merch.split .foreground.container .text > [class^="body-"]:not(merch-card *),
-.aside-merch.split .foreground.container .text > [class^="detail-"]:not(merch-card *),
-.aside-merch.split .foreground.container .text > p:not(merch-card *) {
-  max-width: var(--aside-merch-container-width);
-} */
 
 @media screen and (min-width: 600px) {
   .aside-merch.small {
