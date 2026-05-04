@@ -141,7 +141,10 @@ function decorateLayout(el) {
 export default function init(el) {
   el.classList.add('con-block');
   const blockText = decorateLayout(el);
+  const merchCardEls = [...blockText.querySelectorAll('merch-card :is(p, ul, ol, div):not([class])')];
+  merchCardEls.forEach((e) => e.classList.add('merch-card-el'));
   decorateBlockText(blockText, SPLIT_BLOCK_TEXT);
+  merchCardEls.forEach((e) => e.classList.remove('merch-card-el'));
   decorateTextOverrides(el);
   if (el.classList.contains('l-title')) el.querySelector('[class*="detail-"]')?.classList.add('title-l');
 }
