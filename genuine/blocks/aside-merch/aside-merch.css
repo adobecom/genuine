@@ -415,6 +415,19 @@
   max-width: 100%;
 }
 
+.aside-merch merch-card {
+  --merch-card-plans-padding: 18px;
+}
+
+.aside-merch merch-card [slot="body-xs"] p:not(:has(a)) {
+  padding-inline-start: 1em;
+  text-indent: -1em;
+}
+
+.aside-merch merch-card [slot="body-xs"] p:has(a) + p:not(:has(a)) {
+  margin-top: var(--spacing-s);
+}
+
 .aside-merch.split .foreground.container .text > [class^="heading-"]:not(merch-card *),
 .aside-merch.split .foreground.container .text > [class^="body-"]:not(merch-card *),
 .aside-merch.split .foreground.container .text > [class^="detail-"]:not(merch-card *),
