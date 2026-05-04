@@ -383,7 +383,6 @@
 .aside-merch.center .foreground.container .text > :is(h1, h2, h3, h4, h5, h6),
 .aside-merch.center .foreground.container .text > p {
   max-width: 800px;
-  margin-inline: auto;
 }
 
 .aside-merch.center .foreground.container .text > :is(h1, h2, h3, h4, h5, h6) {
