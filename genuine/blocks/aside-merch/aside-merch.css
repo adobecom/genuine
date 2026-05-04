@@ -427,12 +427,12 @@
   margin-top: var(--spacing-s);
 }
 
-.aside-merch.split .foreground.container .text > [class^="heading-"]:not(merch-card *),
+/* .aside-merch.split .foreground.container .text > [class^="heading-"]:not(merch-card *),
 .aside-merch.split .foreground.container .text > [class^="body-"]:not(merch-card *),
 .aside-merch.split .foreground.container .text > [class^="detail-"]:not(merch-card *),
 .aside-merch.split .foreground.container .text > p:not(merch-card *) {
   max-width: var(--aside-merch-container-width);
-}
+} */
 
 @media screen and (min-width: 600px) {
   .aside-merch.small {
