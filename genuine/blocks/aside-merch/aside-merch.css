@@ -426,6 +426,38 @@
   margin-top: var(--spacing-s);
 }
 
+.aside-merch.no-media .foreground.container .text > [class^="heading-"]:not(merch-card *),
+.aside-merch.no-media .foreground.container .text > [class^="body-"]:not(merch-card *),
+.aside-merch.no-media .foreground.container .text > [class^="detail-"]:not(merch-card *),
+.aside-merch.no-media .foreground.container .text > p:not(merch-card *) {
+  max-width: calc(2 * var(--aside-merch-center-card-width) + var(--spacing-m));
+}
+
+.aside-merch.half .foreground.container .text > [class^="heading-"]:not(merch-card *),
+.aside-merch.half .foreground.container .text > [class^="body-"]:not(merch-card *),
+.aside-merch.half .foreground.container .text > [class^="detail-"]:not(merch-card *),
+.aside-merch.half .foreground.container .text > p:not(merch-card *) {
+  max-width: var(--aside-merch-half-card-width);
+}
+
+.aside-merch.one-third .foreground.container .text > [class^="heading-"]:not(merch-card *),
+.aside-merch.one-third .foreground.container .text > [class^="body-"]:not(merch-card *),
+.aside-merch.one-third .foreground.container .text > [class^="detail-"]:not(merch-card *),
+.aside-merch.one-third .foreground.container .text > p:not(merch-card *) {
+  max-width: calc(2 * var(--aside-merch-one-third-card-width) + var(--spacing-xs));
+}
+
+
+
+@media (max-width: 768px) {
+  .aside-merch.one-third .foreground.container .text > [class^="heading-"]:not(merch-card *),
+  .aside-merch.one-third .foreground.container .text > [class^="body-"]:not(merch-card *),
+  .aside-merch.one-third .foreground.container .text > [class^="detail-"]:not(merch-card *),
+  .aside-merch.one-third .foreground.container .text > p:not(merch-card *) {
+    max-width: var(--aside-merch-one-third-card-width);
+  }
+}
+
 @media screen and (min-width: 600px) {
   .aside-merch.small {
     min-height: var(--aside-merch-min-height-tablet-small);
@@ -562,6 +594,7 @@
   }
 
   .aside-merch.split.one-third .foreground.container .text {
+    flex-direction: column;
     flex: 1 0 100%;
     max-width: 100%;
   }
@@ -584,6 +617,7 @@
   }
 
   .aside-merch.split.half .foreground.container .text {
+    flex-direction: column;
     flex: 1 0 100%;
     max-width: 100%;
     padding: 0 var(--spacing-xl);
